@@ -1,0 +1,52 @@
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+
+
+/*footer*/
+
+footer {
+    width: 100%;
+    height: auto;
+    padding: 15px 0;
+    margin: 15px 0 0 0;
+    /* background-color: #E94174; */
+    background-color: #226BB8;
+    color: #fff;
+    display: flex;
+    
+}
+
+footer div.container {
+    display: flex;
+    align-self: flex-end;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-footer {
+    width: 200px;
+    justify-self: flex-start;
+}
+
+.mapa-site-1 {
+    list-style: none;
+}
+
+.mapa-site-2 {
+    list-style: none;
+
+}

@@ -1,0 +1,25 @@
+{
+  "name": "social-gamers",
+  "version": "1.0.0",
+  "description": "uma rede social para gamers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergioLSJunior/Rede-Social-para-Gamers.git"
+  },
+  "author": "integradorDHgamers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergioLSJunior/Rede-Social-para-Gamers/issues"
+  },
+  "homepage": "https://github.com/SergioLSJunior/Rede-Social-para-Gamers#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13"
+  }
+}

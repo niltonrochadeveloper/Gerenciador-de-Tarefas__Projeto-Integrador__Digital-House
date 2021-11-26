@@ -1,0 +1,43 @@
+
+…or create a new repository on the command line
+
+echo "# DH-projeto-integrador" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/niltonrochadeveloper/DH-projeto-integrador.git
+git push -u origin master
+
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/niltonrochadeveloper/DH-projeto-integrador.git
+git branch -M master
+git push -u origin master
+
+
+//Caso peça para configurar e seja seu primeiro acesso ao git, faça os comando abaixo antes de tudo
+
+//configurar seu user name
+git config user.name "Colocar seu nome aqui"
+
+//configurar seu user.email
+git config user.email "Colocar seu email aqui"
+
+//verificar o andamento do que já foi feito
+git status
+
+
+cores HEX
+
+laranja = #FDA040
+azul esquisito = #A7BAD8
+marrom = #BB4F28
+amarelo = #A464AE
+azul = #226BB8
+rosa = #E94174
+
+outra paleta
+amarelo = #F6DB4D
+cinza = #949699
