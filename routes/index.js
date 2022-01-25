@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const homeController = require('../controllers/homeController')
+const indexController = require('../controllers/indexController')
 
-//http://localhost:3000/
-router.get('/', homeController.index)
+router.get('/', indexController.index)
 
 module.exports = router

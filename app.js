@@ -1,10 +1,55 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = 3000
+const { handlebars, engine } = require('express-handlebars')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const flash = require('connect-flash')
+const port = 3004
 
+var bcrypt = require('bcryptjs')
+var saltRounds = 10
+var salt = bcrypt.genSaltSync(saltRounds)
+// var hash = bcrypt.hashSync(senha, salt);
+
+//json
+app.use(express.json());
+
+//configurações
+
+var minute = 60000
+
+
+// config session
+app.use(session({
+    secret: 'meu_segredo',
+    cookie: {
+        maxAge: minute * 60,
+    },
+    resave: true,
+    saveUninitialized: true
+}));
+
+//cookies
+app.use(cookieParser());
+
+
+
+//config
 app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
+
+//template engine
+app.engine('handlebars', engine({
+    defaultLayout: 'main'
+}))
+app.set('view engine', 'handlebars')
+
+//Body Parser
+// app.use(bodyParser.urlencoded({
+//     extended: false
+// }))
+// app.use(bodyParser.json())
 
 //criando link para o diretório public (css, js, imagens e outros)
 app.use(express.static(path.join(__dirname, 'public')))
@@ -14,7 +59,6 @@ const indexRouter = require('./routes/index')
 
 //usando a rota importada
 app.get('/', indexRouter)
-app.post('/', indexRouter)
 
 
 //servidor local onde vai rodar a aplicação
