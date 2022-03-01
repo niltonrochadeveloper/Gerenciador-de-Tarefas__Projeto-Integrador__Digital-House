@@ -20,23 +20,24 @@
 </head>
 <body>
 
-    <button value="fechar" id="fechar" style="position: absolute; z-index: 1000; top: 52px; left: 195px; border-style: none;">fechar</button>
-    <button value="abrir" id="expandir" style="position: absolute; z-index: 1001; top: 52px; left: 5px; border-style: none; display: none; background-color: midnightblue; color: #fff;">abrir menu</button>
+    <button value="fechar" id="fechar" style="position: absolute; z-index: 1000; top: 52px; left: 242px; background-color: midnightblue; border-style: none; border-radius: 25px; color: #fff; font-size: 17px; width: 27px;"><</button>
+    <button value="abrir" id="expandir" style="position: absolute; z-index: 1001; top: 52px; left: 2px; border-style: none; display: none; color: #fff; background-color: midnightblue; font-size: 17px; width: 27px; border-radius: 25px;">></button>
     
     
 
-<div style="width: 100%; height: 100vh; ">
+<div style="width: 100%; height: 100vh;">
     <div style="position: fixed; width: 100%;">
         <div style="width: 100%; height: 44px; position: relative; color: #000; background-color: blue;">
             teste 1
         </div>
+                    <span style=" background-color: midnightblue; width: 20px; position: absolute; height: 100vh"></span>
         <div id="navbar" style="width: 250px; color: #fff;">   
             {{>_header}}
+
         </div>
     </div>
 
     <div id="content" style="margin-left: 260px; padding-top: 44px; height: 100%;">
-        </section>
         {{{body}}}
     </div>
 
@@ -63,7 +64,7 @@
             navbar.style.display = 'none'
             fechar.style.display = 'none'
             expandir.style.display = 'block' 
-            content.style.marginLeft = '0px'       
+            content.style.marginLeft = '20px'
         }
     }
 

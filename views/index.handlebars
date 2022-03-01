@@ -1,4 +1,17 @@
+<style>
 
+    .adicionarQuadro {
+         background-color: darkgreen;
+    }
+    .adicionarQuadro:hover {
+        background-color:green;
+    }
+
+    .adicionarQuadro:hover a {
+        color: #fff;
+    }
+
+</style>
 
 <section style="overflow-y: scroll; height: 100%;">
     <article style="display: flex   ; flex-wrap: wrap; height: 100%;">
@@ -49,8 +62,8 @@
             </div>
 
             <!--Botão de Acrescentar Quadro-->
-            <div style="align-self: flex-start;padding-top: 1px; margin: 8px 0 0 0; color: #fff; box-shadow: 1px 1px 5px 0px #D2D2D2; width: 45px; height: 45px; border-radius: 25px; background-color: green;">
-                <span title="Adicionar Quadro" style="font-size: 30px; text-align: center; align-items: center; display: flex; justify-content: center;">+</span>
+            <div class="adicionarQuadro" style="align-self: flex-start;padding-top: 1px; margin: 8px 0 0 0; color: #fff; box-shadow: 1px 1px 5px 0px #D2D2D2; width: 45px; height: 45px; border-radius: 25px;">
+                <a href=""><span title="Adicionar Quadro" style="font-size: 30px; text-align: center; align-items: center; display: flex; justify-content: center;">+</span></a>
             </div>
         </div>
     </article>
