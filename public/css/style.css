@@ -12,6 +12,17 @@ a {
     color: #fff;
 }
 
+/* Quadros */
+.adicionarQuadro {
+    background-color: darkgreen;
+}
+.adicionarQuadro:hover {
+   background-color:green;
+}
+
+.adicionarQuadro:hover a {
+   color: #fff;
+}
 
 
 
