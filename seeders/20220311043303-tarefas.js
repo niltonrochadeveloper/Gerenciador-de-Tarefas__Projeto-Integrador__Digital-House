@@ -11,7 +11,7 @@ module.exports = {
       quadroId: '1',
       usuarioId: '1',
       tagId: '1',
-      statusId: '1',
+      rascunhoId: '1',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
@@ -22,7 +22,7 @@ module.exports = {
       quadroId: '1',
       usuarioId: '1',
       tagId: '1',
-      statusId: '1',
+      rascunhoId: '1',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
@@ -33,7 +33,7 @@ module.exports = {
       quadroId: '2',
       usuarioId: '1',
       tagId: '2',
-      statusId: '2',
+      rascunhoId: '2',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
@@ -44,7 +44,7 @@ module.exports = {
       quadroId: '3',
       usuarioId: '1',
       tagId: '1',
-      statusId: '3',
+      rascunhoId: '3',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
@@ -55,7 +55,7 @@ module.exports = {
       quadroId: '3',
       usuarioId: '1',
       tagId: '2',
-      statusId: '3',
+      rascunhoId: '3',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

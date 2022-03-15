@@ -11,13 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Usuarios, {
-        foreignKey: 'usuarioId'
+        foreignKey: 'usuarioId',
+        as: "usuarios"
       })
       this.belongsTo(models.Tags, {
-        foreignKey: 'tagId'
+        foreignKey: 'tagId',
+        as: "tags"
       })
-      this.belongsTo(models.Status, {
-        foreignKey: 'statusId'
+      this.belongsTo(models.Rascunhos, {
+        foreignKey: 'rascunhoId',
+        as: "rascunhos"
+      })
+      this.hasMany(models.Comentarios, {
+        foreignKey: "tarefaId",
+        as: "comentarios"
       })
     }
   }
@@ -28,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     prazo: DataTypes.DATE,
     usuarioId: DataTypes.INTEGER,
     tagId: DataTypes.INTEGER,
-    statusId: DataTypes.INTEGER
+    rascunhoId: DataTypes.INTEGER,
+    comentarioId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Tarefas',

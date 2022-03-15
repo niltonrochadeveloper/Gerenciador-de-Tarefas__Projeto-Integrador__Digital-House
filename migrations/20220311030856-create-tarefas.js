@@ -26,10 +26,13 @@ module.exports = {
       usuarioId: {
         type: Sequelize.INTEGER
       },
-      statusId: {
+      rascunhoId: {
         type: Sequelize.INTEGER
       },
       tagId: {
+        type: Sequelize.INTEGER
+      },
+      comentarioId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
