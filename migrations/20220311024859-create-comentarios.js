@@ -1,31 +1,27 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Usuarios', {
+    await queryInterface.createTable('Comentarios', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nome: {
+      conteudo: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
-        isEmail: true
-      },
-      sobre: {
+      link: {
         type: Sequelize.STRING
       },
-      senha: {
-        type: Sequelize.STRING
+      arquivoId: {
+        type: Sequelize.INTEGER
       },
-      nivelId: {
-        type: Sequelize.INTEGER,
-        defaultValue: 3
+      usuarioId: {
+        type: Sequelize.INTEGER
+      },
+      tarefaId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +34,8 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Usuarios');
+    await queryInterface.dropTable('Comentarios');
   }
 };
+
+//muitos para muitos

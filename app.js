@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const flash = require('connect-flash')
 require('dotenv').config()
-const port = process.env.PORT
+const port = process.env.PORT_ENV
 
 var bcrypt = require('bcryptjs')
 var saltRounds = 10
