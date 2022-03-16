@@ -34,6 +34,29 @@
                         <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">{{dataValues.conteudo}}</p></div>
                         <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">link: {{dataValues.link}}</p></div>
                         <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">prazo:     {{dataValues.prazo}}</p></div>
+                        
+                            <p>criado por: {{usuarios.dataValues.nome}}</p>
+                            <p>categoria: {{tags.dataValues.titulo}}</p>
+                            <p>situação: {{rascunhos.dataValues.titulo}}</p>
+
+                            
+                            {{#if comentarios}}
+                                <div style="border: 1px solid red; padding: 5px;">                     
+                                <p>comentários:</p>
+                                {{else}}
+                                <div style="padding: 5px;">                          
+                            {{/if}}
+
+                                {{#each comentarios}}
+                                <div style="border: 1px solid blue;">
+                                    <p>
+                                        {{dataValues.conteudo}}<br>
+                                        <small>{{usuarios.dataValues.nome}}</small>
+                                    </p>
+                                </div>
+                                {{/each}}
+                            </div>
+
                         <div style="display: flex; justify-content: end;">
                             <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#excluirTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Excluir</a></div>
                             <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#editarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Editar</a></div>

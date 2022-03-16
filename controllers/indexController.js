@@ -15,11 +15,32 @@ const controller = {
 
         const todosOsQuadros = await Quadros.findAll({
             include: [
-                { association: "tarefas" }         
-            ]        
+                { 
+                    association: "tarefas",
+                    include: [
+                        {
+                            association: "usuarios"
+                        },
+                        {
+                            association: "tags"
+                        },
+                        {
+                            association: "rascunhos"
+                        },
+                        {
+                            association: "comentarios",
+                            include: [
+                                {
+                                    association: "usuarios"
+                                }
+                            ]
+                        }
+                    ]
+                }          
+            ]
         })
 
-        console.log(todosOsQuadros)
+        // console.log(todosOsQuadros[0].tarefas)
         // res.send(todosOsQuadros)
 
         res.render('index', {
