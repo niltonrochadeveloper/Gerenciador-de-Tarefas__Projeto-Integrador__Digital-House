@@ -13,22 +13,19 @@ const Comentarios = models.Comentarios
 const controller = {
     index: async (req, res) => {
 
-        const todosOsQuadros = await Tarefas.findAll({
+        const todosOsQuadros = await Quadros.findAll({
             include: [
-                { association: "usuarios" },
-                { association: "tags" },
-                { association: "rascunhos" },               
-                { association: "comentarios" }               
-            ]
+                { association: "tarefas" }         
+            ]        
         })
 
-        // console.log(todosOsQuadros)
-        res.send(todosOsQuadros)
+        console.log(todosOsQuadros)
+        // res.send(todosOsQuadros)
 
-        // res.render('index', {
-        //     title: 'Home',
-        //     todosOsQuadros
-        // })
+        res.render('index', {
+            title: 'Home',
+            todosOsQuadros
+        })
     }
 }
 
