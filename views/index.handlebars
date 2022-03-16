@@ -58,8 +58,9 @@
                             </div>
 
                         <div style="display: flex; justify-content: end;">
+                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#visualizarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: green; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Visualizar</a></div>
                             <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#excluirTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Excluir</a></div>
-                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#editarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Editar</a></div>
+                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#editarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: blue; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Editar</a></div>
                         </div>
                     </div>
                     
@@ -114,6 +115,82 @@
         </div>
     </div>
 </div>
+{{/each}}
+
+{{#each todosOsQuadros}}
+    {{#each tarefas}}
+    <!-- Modal -->
+    <div class="modal fade" id="visualizarTarefa{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{dataValues.titulo}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+            {{!-- {{#each todosOsQuadros}} --}}
+            {{!-- <div style="margin-right: 12px; box-shadow: 1px 1px 5px 0px #5e5e5e; width: 272px; height: 98%; padding: 12px; border-radius: 12px; background-color: #fff; display: flex; flex-wrap: wrap; flex-direction: column; overflow: hidden;"> --}}
+                
+                <!--Título do Quadro -->
+                {{!-- <h5 style="font-size: 18px;">{{dataValues.titulo}}</h5> --}}
+
+
+                <div style=" overflow-y: scroll; height: 90%;">
+                    
+                    <!-- Tarefa -->
+                    {{!-- {{#each tarefas}} --}}
+                    <div style="margin: 1px 10px 8px 1px; border-radius: 8px; padding: 5px 7px;">
+                        {{!-- <h4>{{dataValues.titulo}}</h4> --}}
+                        <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">{{dataValues.conteudo}}</p></div>
+                        <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">link: {{dataValues.link}}</p></div>
+                        <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">prazo:     {{dataValues.prazo}}</p></div>
+                        
+                            <p>criado por: {{usuarios.dataValues.nome}}</p>
+                            <p>categoria: {{tags.dataValues.titulo}}</p>
+                            <p>situação: {{rascunhos.dataValues.titulo}}</p>
+
+                            
+                            {{#if comentarios}}
+                                <div style="border: 1px solid red; padding: 5px;">                     
+                                <p>comentários:</p>
+                                {{else}}
+                                <div style="padding: 5px;">                          
+                            {{/if}}
+
+                                {{#each comentarios}}
+                                <div style="border: 1px solid blue;">
+                                    <p>
+                                        {{dataValues.conteudo}}<br>
+                                        <small>{{usuarios.dataValues.nome}}</small>
+                                    </p>
+                                </div>
+                                {{/each}}
+                            </div>
+
+                        <div style="display: flex; justify-content: end;">
+                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#excluirTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Excluir</a></div>
+                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#editarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: blue; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Editar</a></div>
+                        </div>
+                    </div>
+                    
+                    {{!-- {{/each}} --}}
+                    
+                    
+                </div>
+                {{!-- <div style="display: flex; justify-self: flex-end; align-self: flex-end; position: absolute; bottom: 18px;"><a data-bs-toggle="modal" data-bs-target="#myModal{{dataValues.id}}" href="#" style="color: #fff; background-color: #FDA040; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Adicionar Tarefa</a></div> --}}
+            </div>
+            {{!-- </div> --}}
+            {{!-- {{/each}} --}}
+
+        </div>
+        {{!-- <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div> --}}
+        </div>
+    </div>
+    </div>
+    {{/each}}
 {{/each}}
 
 {{#each todosOsQuadros}}
