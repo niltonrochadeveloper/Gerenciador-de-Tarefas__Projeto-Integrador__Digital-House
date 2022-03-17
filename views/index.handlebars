@@ -1,42 +1,36 @@
-<style>
 
-    .adicionarQuadro {
-         background-color: darkgreen;
-    }
-    .adicionarQuadro:hover {
-        background-color:green;
-    }
 
-    .adicionarQuadro:hover a {
-        color: #fff;
-    }
 
-</style>
-
-<section style="overflow-y: scroll; height: 100%;">
+{{!-- modelos
+https://dribbble.com/shots/15813204-Finance-Dashboard
+ --}}
+{{#if todosOsQuadros}}
+<section style="overflow-y: scroll; height: 100%; width: 100%   ">
     <article style="display: flex; flex-wrap: wrap; height: 100%;">
-        <div style="margin: 0 10px; padding: 0; height: 100%; display: flex; justify-content: start; align-items: center;">
+        <div style="margin: 0 8px; padding: 0; height: 100%; display: flex; justify-content: start; align-items: center;">
             
             <!--Quadro-->
             {{#each todosOsQuadros}}
-            <div style="margin-right: 12px; box-shadow: 1px 1px 5px 0px #5e5e5e; width: 272px; height: 98%; padding: 12px; border-radius: 12px; background-color: #fff; display: flex; flex-wrap: wrap; flex-direction: column; overflow: hidden;">
+            <div style="margin-right: 12px; width: 280px; height: 100%; display: flex; flex-wrap: wrap; flex-direction: column; overflow: hidden;">
                 
                 <!--Título do Quadro -->
-                <h5 style="font-size: 18px;">{{dataValues.titulo}}</h5>
+                <h5 style="font-size: 18px; font-weight: 700; margin-top: 10px;">{{dataValues.titulo}}</h5>
 
 
-                <div style=" overflow-y: scroll; height: 90%;">
+                <div style=" overflow-y: scroll; height: 86%; margin-top: 15px; width: 100%;">
                     
                     <!-- Tarefa -->
                     {{#each tarefas}}
-                    <div style="margin: 1px 10px 8px 1px; border-radius: 8px; padding: 5px 7px; box-shadow: 1px 1px 5px 0px #5e5e5e;">
+                    <div style="margin: 1px 5px 8px 1px; border-radius: 25px; padding: 25px 28px; box-shadow: 1px 1px 5px 0px #5e5e5e;">
                         <h4>{{dataValues.titulo}}</h4>
                         <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">{{dataValues.conteudo}}</p></div>
                         <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">link: {{dataValues.link}}</p></div>
                         <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">prazo:     {{dataValues.prazo}}</p></div>
                         
                             <p>criado por: {{usuarios.dataValues.nome}}</p>
-                            <p>categoria: {{tags.dataValues.titulo}}</p>
+                            <small>categorias:<br><span style="color: #fff; background-color: red; border-radius: 25px; padding: 1px 10px 2px 10px; font-size: 10px;">{{tags.dataValues.titulo}}</span></small>
+                            
+                            <br><br>
                             <p>situação: {{rascunhos.dataValues.titulo}}</p>
 
                             
@@ -57,10 +51,10 @@
                                 {{/each}}
                             </div>
 
-                        <div style="display: flex; justify-content: end;">
-                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#visualizarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: green; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Visualizar</a></div>
-                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#excluirTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Excluir</a></div>
-                            <div style="margin: 2px;"><a data-bs-toggle="modal" data-bs-target="#editarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: blue; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Editar</a></div>
+                        <div style="display: flex; justify-content: center; margin: 5px 0 0 0;">
+                            <div style="margin: 1px;"><a data-bs-toggle="modal" data-bs-target="#visualizarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: green; padding: 3px 11px 4px 11px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Visualizar</a></div>
+                            <div style="margin: 1px;"><a data-bs-toggle="modal" data-bs-target="#excluirTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 11px 4px 11px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Excluir</a></div>
+                            <div style="margin: 1px;"><a data-bs-toggle="modal" data-bs-target="#editarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: blue; padding: 3px 11px 4px 11px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Editar</a></div>
                         </div>
                     </div>
                     
@@ -68,14 +62,17 @@
                     
                     
                 </div>
-                <div style="display: flex; justify-self: flex-end; align-self: flex-end; position: absolute; bottom: 18px;"><a data-bs-toggle="modal" data-bs-target="#myModal{{dataValues.id}}" href="#" style="color: #fff; background-color: #FDA040; padding: 3px 15px 3px 15px; border-radius: 8px; font-size: 12px; align-self: flex-end;">Adicionar Tarefa</a></div>
+                <div style="display: flex; justify-self: flex-end; align-self: flex-end; position: absolute; bottom: 18px;"><a data-bs-toggle="modal" data-bs-target="#myModal{{dataValues.id}}" href="#" style="color: #fff; background-color: #FDA040; padding: 3px 15px 2px 15px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Adicionar Tarefa</a></div>
             </div>
             {{/each}}
 
+            
             <!--Botão de Acrescentar Quadro-->
-            <div class="adicionarQuadro" style="align-self: flex-start;padding-top: 1px; margin: 8px 0 0 0; color: #fff; box-shadow: 1px 1px 5px 0px #D2D2D2; width: 45px; height: 45px; border-radius: 25px;">
-                <a data-bs-toggle="modal" data-bs-target="#adicionarQuadro" href=""><span title="Adicionar Quadro" style="font-size: 30px; text-align: center; align-items: center; display: flex; justify-content: center;">+</span></a>
+            <div class="adicionarQuadro" style="align-self: flex-start; padding-top: 1px; margin: 8px 0 0 0; box-shadow: 1px 1px 5px 0px #D2D2D2; border-radius: 25px; position: absolute; right: 25px; top: 20px;">
+                <a data-bs-toggle="modal" data-bs-target="#adicionarQuadro" href=""><span title="Adicionar Quadro" style="font-size: 16px; color: #fff; padding: 16px 20px; text-align: center; align-items: center; display: flex; justify-content: center;">+ Adicionar quadro</span></a>
             </div>
+
+                        
         </div>
     </article>
 </section>
@@ -255,12 +252,34 @@
     {{/each}}
 {{/each}}
 
+{{else}}
+
+<section style="overflow-y: scroll; height: 100%; width: 100%   ">
+    <article style="display: flex; flex-wrap: wrap; height: 100%; width: 100%;">
+        <div style=" margin: 0 8px; padding: 0; display: flex; justify-content: end; align-items: center;">        
+
+            <div style="margin: 200px 12px 0 15px; width: 100%; height: 100%; display: flex; flex-wrap: wrap; flex-direction: column; overflow: hidden;">
+                <h3>Você ainda não criou nenhum quadro.</h3>
+                <p>Inicie agora mesmo. Clique em "Adicionar novo quadro".</p>
+            </div>
+
+            <!--Botão de Acrescentar Quadro-->
+            <div class="adicionarQuadro" style="align-self: flex-start; padding-top: 1px; margin: 8px 0 0 0; box-shadow: 1px 1px 5px 0px #D2D2D2; border-radius: 25px; position: absolute; right: 25px; top: 20px;">
+                <a data-bs-toggle="modal" data-bs-target="#adicionarQuadro" href=""><span title="Adicionar Quadro" style="font-size: 16px; color: #fff; padding: 16px 20px; text-align: center; align-items: center; display: flex; justify-content: center;">+ Adicionar quadro</span></a>
+            </div>
+
+        </div>
+    </article>
+</section>
+
+{{/if}}
+
     <!-- Modal -->
 <div class="modal fade" id="adicionarQuadro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar novo quadro</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar quadro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/adicionar/tarefa" method="POST">
