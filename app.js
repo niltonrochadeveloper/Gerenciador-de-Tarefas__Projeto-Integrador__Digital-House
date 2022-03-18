@@ -47,19 +47,24 @@ app.engine('handlebars', engine({
 app.set('view engine', 'handlebars')
 
 //Body Parser
-// app.use(bodyParser.urlencoded({
-//     extended: false
-// }))
-// app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+app.use(bodyParser.json())
 
 //criando link para o diretório public (css, js, imagens e outros)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // importando a rota a utilizar na Home
 const indexRouter = require('./routes/index')
+const adminRouter = require('./routes/admin')
 
-//usando a rota importada
-app.get('/', indexRouter)
+//usando a rota importada 
+app.use('/', indexRouter)
+
+//administrador
+app.use('/admin', adminRouter)
+
 
 
 //servidor local onde vai rodar a aplicação
