@@ -35,7 +35,22 @@ app.use(session({
 //cookies
 app.use(cookieParser());
 
+app.use( async(req, res, next) => {
 
+    res.locals.authenticated = []
+    res.locals.isAdmin = []
+
+    const authenticated = req.session.authenticated
+    const isAdmin = req.session.isAdmin 
+
+    // console.log(authenticated)
+    // console.log(req.session)
+    // console.log(authenticated)
+    // console.log(isAdmin)
+    
+    next()
+
+})
 
 //config
 app.set('views', path.join(__dirname, 'views'))
@@ -65,7 +80,7 @@ app.use('/', indexRouter)
 //administrador
 app.use('/admin', adminRouter)
 
-
+// http://localhost:3004/autenticar
 
 //servidor local onde vai rodar a aplicação
 app.listen(port, () => {

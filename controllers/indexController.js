@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs')
 const controller = {
     index: async (req, res) => {
 
-        // if(authenticated) {
+        if(req.session.authenticated) {
 
         const usuarioEmail = "jornalista.nilton@gmail.com"
         const areaSelecionada = 1
@@ -69,12 +69,14 @@ const controller = {
 
         res.render('index', {
             title: 'Task Manager PRO',
-            areaDeTrabalho: areaDeTrabalho
+            areaDeTrabalho: areaDeTrabalho,
+            authenticated: req.session.authenticated,
+            isAdmin: req.session.isAdmin
         })
 
-    // } else {
-    //     res.redirect('/login')
-    // }
+    } else {
+        res.redirect('/login')
+    }
 
     },
     login: async (req, res) => {
@@ -85,6 +87,8 @@ const controller = {
     autenticar: async (req, res) => {
 
         try {
+
+            
 
             const { email, senha } = req.body
 
@@ -99,8 +103,37 @@ const controller = {
 
         
             if (result) {
+
+                const logado = {
+                    autenticado: {
+                    id: usuario['id'],
+                    nome: usuario['nome'],
+                    email: usuario['email'],
+                    sobre: usuario['sobre'],
+                    admin: usuario['nivelId']
+                }
+
+                }
+
+                // var verdadeiro = true
+                res.locals.authenticated.push(logado)
+                
+
+
+                if(res.locals.authenticated[0].autenticado.admin === 1) {
+                    res.locals.isAdmin.push(true)
+                    req.session.isAdmin = true
+                }
+
+                
+                req.session.authenticated = logado.autenticado
+
+                console.log(res.locals.authenticated[0])
+                console.log(res.locals.isAdmin[0])
+
                 console.log("Senha correta  ");
             } else {
+                console.log(res.locals.authenticated)
                 console.log("Senha errada");
             }
 
@@ -113,6 +146,19 @@ const controller = {
         }
 
         
+
+    },
+    logout: async (req, res) => {
+        req.session.destroy(function(err){
+            if(err){
+               console.log(err);
+            }else{
+                req.end();
+                res.redirect('/login');
+            }
+         });
+
+         res.redirect('/login');
 
     },
     areasdetrabalho: async (req, res) => {
