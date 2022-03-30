@@ -49,7 +49,6 @@
     var content = document.querySelector('#content')
 
     var navbar = document.querySelector('#navbar')
-    var navbarLi = document.querySelector('.navbarLi')
 
     fechar.addEventListener('click', fecharMenuLateral)
 
@@ -62,10 +61,10 @@
         console.log(fecharBotao)
 
         if(fecharBotao) {
-            navbarLi.style.display = 'none'
+            navbar.style.display = 'none'
             fechar.style.display = 'none'
             expandir.style.display = 'block' 
-            content.style.minWidth = '65px'
+            content.style.minWidth = '0'
         }
     }
 
@@ -75,7 +74,7 @@
         console.log(abrirBotao)
 
         if(abrirBotao) {
-            navbarLi.style.display = 'block'
+            navbar.style.display = 'block'
             fechar.style.display = 'block'
             expandir.style.display = 'none'
             content.style.minWidth = '240px'
