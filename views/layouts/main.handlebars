@@ -10,10 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/style.css">
+
+
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
@@ -23,24 +27,17 @@
 <body>
 
     {{!-- {{#if authenticated}} --}}
-
-    <button value="fechar" id="fechar" style="position: absolute; z-index: 1000; top: 52px; left: 242px; background-color: midnightblue; border-style: none; border-radius: 25px; color: #fff; font-size: 17px; width: 27px;"><</button>
-    <button value="abrir" id="expandir" style="position: absolute; z-index: 1001; top: 52px; left: 2px; border-style: none; display: none; color: #fff; background-color: midnightblue; font-size: 17px; width: 27px; border-radius: 25px;">></button>
-    
-    
-
-<div style="width: 100%; height: 100vh;">
-    
-    <div style="position: fixed; width: 100%;">
-        <span style="display: block; background-color: blue; width: 20px; position: absolute; height: 100vh">
-        <div id="navbar" style="width: 250px;">   
-            {{>_header}}
-        </div></span>
-    </div>
-
-    <div id="content" style="margin-left: 260px; padding: 5px 0; height: 100%;">
-        {{{body}}}
-    </div>
+  
+    <section style="height: 100vh; width: 100%;">
+        <div class="container-fluid p-0 m-0 h-100 w-100" style="display: flex; justify-content: flex-start;">
+            <div id="content" style="min-width: 240px; position: relative; background-color: #1f3447;">
+                <button value="fechar" id="fechar" style="position: absolute; z-index: 100; top: 10px; right: 3px; border-style: none; color: #fff; background-color: transparent;"><i class='bx bx-menu-alt-right bx-sm'></i></button>
+                <button value="abrir" id="expandir" style="position: absolute; z-index: 101; top: 10px; left: 15px; border-style: none; display: none; color: #fff; background-color: transparent;"><i class='bx bx-menu bx-sm'></i></button>
+                {{>_navbar}}
+            </div>
+            <div style="width: 100%;">{{{body}}}</div>
+        </div>
+    </section>
 
 </div>
 
@@ -52,6 +49,7 @@
     var content = document.querySelector('#content')
 
     var navbar = document.querySelector('#navbar')
+    var navbarLi = document.querySelector('.navbarLi')
 
     fechar.addEventListener('click', fecharMenuLateral)
 
@@ -64,10 +62,10 @@
         console.log(fecharBotao)
 
         if(fecharBotao) {
-            navbar.style.display = 'none'
+            navbarLi.style.display = 'none'
             fechar.style.display = 'none'
             expandir.style.display = 'block' 
-            content.style.marginLeft = '20px'
+            content.style.minWidth = '65px'
         }
     }
 
@@ -77,10 +75,10 @@
         console.log(abrirBotao)
 
         if(abrirBotao) {
-            navbar.style.display = 'block'
+            navbarLi.style.display = 'block'
             fechar.style.display = 'block'
             expandir.style.display = 'none'
-            content.style.marginLeft = '260px'
+            content.style.minWidth = '240px'
         }
     }
 

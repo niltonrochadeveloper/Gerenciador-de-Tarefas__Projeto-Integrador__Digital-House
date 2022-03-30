@@ -153,7 +153,7 @@ const controller = {
             if(err){
                console.log(err);
             }else{
-                req.end();
+                // req.end();
                 res.redirect('/login');
             }
          });
@@ -164,8 +164,19 @@ const controller = {
     areasdetrabalho: async (req, res) => {
 
     },
-    quadros: async (req, res) => {
-        
+    adicionarQuadro: async (req, res) => {
+
+        const { titulo, descricao, areaId, tarefaId } = req.body
+
+        await models.Usuario.create({
+            titulo: titulo,
+            descricao: descricao,
+            areaId: areaId,
+            tarefaId: tarefaId
+        })
+
+        res.redirect('/')
+
     },
     rascunhos: async (req, res) => {
         

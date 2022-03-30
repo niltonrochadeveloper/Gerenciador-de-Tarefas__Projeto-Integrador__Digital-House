@@ -80,7 +80,7 @@ app.use('/', indexRouter)
 //administrador
 app.use('/admin', adminRouter)
 
-// http://localhost:3004/autenticar
+
 
 //servidor local onde vai rodar a aplicação
 app.listen(port, () => {

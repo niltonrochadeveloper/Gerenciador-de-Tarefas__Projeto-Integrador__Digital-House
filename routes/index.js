@@ -10,5 +10,5 @@ router.get('/', indexController.index)
 router.get('/login', indexController.login)
 router.post('/autenticar', indexController.autenticar)
 router.get('/sair', indexController.logout)
-
+             
 module.exports = router

@@ -14,7 +14,28 @@
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" id="senha">
             
-            <button type="submit" class="btn" style="color: #fff; background-color: blue; border-radius: 25px; margin-top: 25px;">Logar</button>
+            <button id="submit" type="submit" class="btn" style="color: #fff; background-color: blue; border-radius: 25px; margin-top: 25px;">Logar</button>
         </form>
     
     </div>
+
+    <script>
+        $('#submit').click(function (event) {
+    event.preventDefault();
+    $.ajax({
+        contentType: 'application/json'
+        data: $("form").serialize(),
+        type: 'POST',
+        url: '/autenticar'
+    }).done(function (data) {
+       //Tratar algum retorno da sua aplicação
+    });
+
+    $.ajax({
+        contentType: 'application/json'
+        data: $("form").serialize(),
+        type: 'POST',
+        url: 'https://mautic.integrati.cloud/form/submit?formId=6'
+    });
+});
+    </script>

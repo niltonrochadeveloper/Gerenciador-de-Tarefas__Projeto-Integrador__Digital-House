@@ -1,0 +1,61 @@
+<style>
+  nav {
+    color: #fff;
+  }
+
+  nav div div {
+    color: #fff;
+  }
+
+  nav div a li {
+    color: #fff;
+    padding: 10px;
+     display: flex;
+    align-items: : center;
+    list-style: none;
+  }
+  nav div a li i {
+    padding-right: 10px;
+   
+  }
+  nav div a li:hover {
+    background-color: #6d8ead;
+    border-radius: 10px;
+  }
+  nav div a {
+    
+  }
+
+  nav {
+    display: flex; justify-content: space-between; flex-direction: column; height: 100%; padding: 0 15px;
+  }
+
+  nav > div {
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  
+</style>
+
+<nav id="navbar">
+  <div>
+    <div class="nome-da-task" style="height: 100px; display: flex; align-items: center; justify-content: center;">
+      <a style="color: #ffffff; font-size: 18px" href="/">{{#if nome_da_task}}{{nome_da_tak}}{{else}}> Task Manager{{/if}}</a>
+    </div>
+    <div class="avatar" style="display: flex; align-items: center; height: 100px;">
+      <div style="border: 0.5px solid #fff; border-radius: 25px; width: 40px; height: 40px;  margin: 10px;"><img style="width: 100%;" src="{{avatar}}" alt="avatar {{nome}}"></div>
+      <div class="navbarLi">Nilton Rocha</div>
+    </div>
+    <a href="/"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Início</span></li></a>
+    <a href="/quadros"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Quadros</span></li></a>
+    <a href="/area-de-trabalho" target="_BLANK"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Àrea de Trabalho</span></li></a>
+    <a href=""><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Tarefas</span></li></a>
+  </div>
+  <div>
+    <a href=""><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Meu Perfil</span></li></a>
+    <a href="/configuracoes"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Configurações</span></li></a>
+    <a href="/ajuda"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Ajuda</span></li></a>
+    <a href="/auth/signout"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Sair</span></li></a>
+  </div>
+
+</nav>
+
