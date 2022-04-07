@@ -72,10 +72,14 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // importando a rota a utilizar na Home
 const indexRouter = require('./routes/index')
+const authRouter = require('./routes/auth')
 const adminRouter = require('./routes/admin')
 
 //usando a rota importada 
 app.use('/', indexRouter)
+
+//usando as rotas para autenticação de usuário
+app.use('/', authRouter)
 
 //administrador
 app.use('/admin', adminRouter)

@@ -4,11 +4,11 @@ const models = require('../models')
 const controller = {
     index: async (req, res) => {
         try {
-            // if(authenticated && isAdmin) {
+            if(authenticated && isAdmin) {
                 res.render('admin/usuarios')
-            // } else {
-            //     res.redirect('')
-            // }
+            } else {
+                res.redirect('/')
+            }
         } catch(erro) {
             res.redirect('/')
         }
