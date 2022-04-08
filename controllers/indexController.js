@@ -8,9 +8,6 @@ const controller = {
 
         if(req.session.authenticated) {
 
-        const usuarioEmail = "jornalista.nilton@gmail.com"
-        const areaSelecionada = 1
-
         // const usuarioEmail = "nilton.silva@grupocard.com.br"
         // const areaSelecionada = 2
 
@@ -19,13 +16,13 @@ const controller = {
 
         const usuario = await models.Usuarios.findOne({
             where: {
-                email: usuarioEmail
+                email: req.session.authenticated.email
             },
             include: [
                 {
                     association: "areas",
                     where: {
-                        id: areaSelecionada
+                        id: req.session.authenticated.id
                     },
                     include: [
                         {

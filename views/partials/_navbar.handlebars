@@ -42,8 +42,8 @@
       <a style="color: #ffffff; font-size: 18px" href="/">{{#if nome_da_task}}{{nome_da_tak}}{{else}}> Task Manager{{/if}}</a>
     </div>
     <div class="avatar" style="display: flex; align-items: center; height: 100px;">
-      <div style="border: 0.5px solid #fff; border-radius: 25px; width: 40px; height: 40px;  margin: 10px;"><img style="width: 100%;" src="{{avatar}}" alt="avatar {{nome}}"></div>
-      <div class="navbarLi">Nilton Rocha</div>
+      <div style="border-radius: 25px; width: 40px; height: 40px;  margin: 10px; overflow: hidden;"><img style="width: 100%;" src="{{#if avatar}}{{avatar}}{{else}}https://cdnjs.cloudflare.com/ajax/libs/design-system/3.0.0-dev/images/avatar1.jpg{{/if}}" alt="avatar {{nome}}"></div>
+      <div class="navbarLi">{{authenticated.nome}}</div>
     </div>
     <a href="/"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Início</span></li></a>
     <a href="/quadros"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Quadros</span></li></a>
