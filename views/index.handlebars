@@ -1,83 +1,63 @@
 
-
-
-{{!-- modelos
-https://dribbble.com/shots/15813204-Finance-Dashboard
- --}}
-{{#if areaDeTrabalho}}
-<section style="overflow-y: scroll; height: 100%; width: 100%">
-    <article style="display: flex; flex-wrap: wrap; height: 100%;">
-        <div style="margin: 0 8px; padding: 0; height: 100%; display: flex; justify-content: start; align-items: center;">
+<style>
+    .scroll_quadro::-webkit-scrollbar {
+  width: 12px;
+}
+</style>
+{{#if quadrosAreaDeTrabalho}}
+<section style="overflow: hidden; height: 100%;">
+    <article class="container" style="display: flex; flex-wrap: wrap; height: 100%;">
+        <div style="display: flex; justify-content: start; align-items: center;">
             
             <!--Quadro-->
-            {{#each areaDeTrabalho}}
-            <div style="margin-right: 12px; width: 280px; height: 100%; display: flex; flex-wrap: wrap; flex-direction: column; overflow: hidden;">
+            {{#each quadrosAreaDeTrabalho}}
+            <div style="width: 280px; height: 90%; display: flex; flex-wrap: wrap; flex-direction: column;">
                 
                 <!--Título do Quadro -->
+
                 <h5 style="font-size: 18px; font-weight: 700; margin-top: 10px;">{{dataValues.titulo}}</h5>
+                {{#if ../isAdmin}}<a style="width: 50px; text-align: center;" data-bs-toggle="modal" data-bs-target="#excluirQuadro{{dataValues.id}}" href="#">deletar</a>{{/if}}
 
 
-                <div style=" overflow-y: scroll; height: 86%; margin-top: 15px; width: 100%;">
+                <div class="scroll_quadro" style="height: 84%; width: 100%; margin-top: 15px;">
                     
                     <!-- Tarefa -->
                     {{#each tarefas}}
-                    <div style="margin: 1px 5px 8px 1px; border-radius: 25px; padding: 25px 28px; box-shadow: 1px 1px 5px 0px #5e5e5e;">
-                        <h4>{{dataValues.titulo}}</h4>
-                        <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">{{dataValues.conteudo}}</p></div>
-                        <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">link: {{dataValues.link}}</p></div>
-                        <div style="overflow-x: hidden;"><p style="font-size: 13px; text-align: justify">prazo:     {{dataValues.prazo}}</p></div>
+                    <div style="margin: 8px 5px; border-radius: 10px; padding: 20px 25px; -webkit-box-shadow: 2px 2px 7px 1px rgba(0,0,0,0.15); box-shadow: 2px 2px 7px 1px rgba(0,0,0,0.15);">
+                        <small><span style="border-bottom: 0.5px solid #e2e2e2; padding: 0 0 2px 0; font-size: 10px;">{{tags.dataValues.titulo}}</span></small>
+                        <h4 style="margin: 7px 0;">{{dataValues.titulo}}</h4>
+                        <div style="overflow-y: hidden; height:47px;"><p style="font-size: 11.5px; text-align: justify">{{dataValues.conteudo}}</p></div>
                         
-                            <p>criado por: {{usuarios.dataValues.nome}}</p>
-                            <small>categorias:<br><span style="color: #fff; background-color: red; border-radius: 25px; padding: 1px 10px 2px 10px; font-size: 10px;">{{tags.dataValues.titulo}}</span></small>
-                            
-                            <br><br>
-                            <p>situação: {{rascunhos.dataValues.titulo}}</p>
-
-                            
-                            {{#if comentarios}}
-                                <div style="border: 1px solid red; padding: 5px;">                     
-                                <p>comentários:</p>
-                                {{else}}
-                                <div style="padding: 5px;">                          
-                            {{/if}}
-
-                                {{#each comentarios}}
-                                <div style="border: 1px solid blue;">
-                                    <p>
-                                        {{dataValues.conteudo}}<br>
-                                        <small>{{usuarios.dataValues.nome}}</small>
-                                    </p>
-                                </div>
-                                {{/each}}
-                            </div>
-
-                        <div style="display: flex; justify-content: center; margin: 5px 0 0 0;">
-                            <div style="margin: 1px;"><a data-bs-toggle="modal" data-bs-target="#visualizarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: green; padding: 3px 11px 4px 11px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Visualizar</a></div>
-                            <div style="margin: 1px;"><a data-bs-toggle="modal" data-bs-target="#excluirTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: red; padding: 3px 11px 4px 11px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Excluir</a></div>
-                            <div style="margin: 1px;"><a data-bs-toggle="modal" data-bs-target="#editarTarefa{{dataValues.id}}" href="#" style="color: #fff; background-color: blue; padding: 3px 11px 4px 11px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Editar</a></div>
+                        <div style="display: flex; justify-content: end; margin: 12px 0 0 0; ">
+                            <a data-bs-toggle="modal" data-bs-target="#visualizarTarefa{{dataValues.id}}" href="#" style="font-size: 11.5px;">visualizar ></a>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     {{/each}}
                     
-                    
                 </div>
-                <div style="display: flex; justify-self: flex-end; align-self: flex-end; position: absolute; bottom: 18px;"><a data-bs-toggle="modal" data-bs-target="#myModal{{dataValues.id}}" href="#" style="color: #fff; background-color: #FDA040; padding: 3px 15px 2px 15px; border-radius: 25px; font-size: 12px; align-self: flex-end;">Adicionar Tarefa</a></div>
+
+                <div style="display: flex; justify-self: flex-end; align-self: flex-end; position: absolute; bottom: 18px;">
+                    <a data-bs-toggle="modal" data-bs-target="#myModal{{dataValues.id}}" href="#" style="color: #fff; background-color: #FDA040; padding: 3px 15px 2px 15px; border-radius: 25px; font-size: 12px; align-self: flex-end;">
+                        Adicionar Tarefa
+                    </a>
+                </div>
+
             </div>
+            <span style="background-color: red; width: 15px;"></span>
             {{/each}}
 
             
-            <!--Botão de Acrescentar Quadro-->
-            <div class="adicionarQuadro" style="align-self: flex-start; padding-top: 1px; margin: 8px 0 0 0; box-shadow: 1px 1px 5px 0px #D2D2D2; border-radius: 25px; position: absolute; right: 25px; top: 20px;">
-                <a data-bs-toggle="modal" data-bs-target="#adicionarQuadro" href=""><span title="Adicionar Quadro" style="font-size: 16px; color: #fff; padding: 16px 20px; text-align: center; align-items: center; display: flex; justify-content: center;">+ Adicionar quadro</span></a>
-            </div>
+            
 
                         
         </div>
     </article>
 </section>
 
-{{#each areaDeTrabalho}}
+
+
+
+{{#each quadrosAreaDeTrabalho}}
 <!-- Modal -->
 <div class="modal fade" id="myModal{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -114,7 +94,7 @@ https://dribbble.com/shots/15813204-Finance-Dashboard
 </div>
 {{/each}}
 
-{{#each areaDeTrabalho}}
+{{#each quadrosAreaDeTrabalho}}
     {{#each tarefas}}
     <!-- Modal -->
     <div class="modal fade" id="visualizarTarefa{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -126,7 +106,7 @@ https://dribbble.com/shots/15813204-Finance-Dashboard
         </div>
         <div class="modal-body">
             
-            {{!-- {{#each areaDeTrabalho}} --}}
+            {{!-- {{#each quadrosAreaDeTrabalho}} --}}
             {{!-- <div style="margin-right: 12px; box-shadow: 1px 1px 5px 0px #5e5e5e; width: 272px; height: 98%; padding: 12px; border-radius: 12px; background-color: #fff; display: flex; flex-wrap: wrap; flex-direction: column; overflow: hidden;"> --}}
                 
                 <!--Título do Quadro -->
@@ -190,7 +170,7 @@ https://dribbble.com/shots/15813204-Finance-Dashboard
     {{/each}}
 {{/each}}
 
-{{#each areaDeTrabalho}}
+{{#each quadrosAreaDeTrabalho}}
     {{#each tarefas}}
     <!-- Modal -->
     <div class="modal fade" id="excluirTarefa{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -213,7 +193,28 @@ https://dribbble.com/shots/15813204-Finance-Dashboard
     {{/each}}
 {{/each}}
 
-{{#each areaDeTrabalho}}
+{{#each quadrosAreaDeTrabalho}}
+    <!-- Modal -->
+    <div class="modal fade" id="excluirQuadro{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Excluir {{dataValues.titulo}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Deseja realmente excluir a Quadro {{dataValues.titulo}}?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+            <a href="/deletar/quadro/{{dataValues.id}}"><button type="button" class="btn btn-primary">Excluir Definitivamente</button></a>
+        </div>
+        </div>
+    </div>
+    </div>
+{{/each}}
+
+{{#each quadrosAreaDeTrabalho}}
     {{#each tarefas}}
     <!-- Modal -->
     <div class="modal fade" id="editarTarefa{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -260,12 +261,7 @@ https://dribbble.com/shots/15813204-Finance-Dashboard
 
             <div style="margin: 200px 12px 0 15px; width: 100%; height: 100%; display: flex; flex-wrap: wrap; flex-direction: column; overflow: hidden;">
                 <h3>Você ainda não criou nenhum quadro.</h3>
-                <p>Inicie agora mesmo. Clique em "Adicionar novo quadro".</p>
-            </div>
-
-            <!--Botão de Acrescentar Quadro-->
-            <div class="adicionarQuadro" style="align-self: flex-start; padding-top: 1px; margin: 8px 0 0 0; box-shadow: 1px 1px 5px 0px #D2D2D2; border-radius: 25px; position: absolute; right: 25px; top: 20px;">
-                <a data-bs-toggle="modal" data-bs-target="#adicionarQuadro" href=""><span title="Adicionar Quadro" style="font-size: 16px; color: #fff; padding: 16px 20px; text-align: center; align-items: center; display: flex; justify-content: center;">+ Adicionar quadro</span></a>
+                <p>Inicie agora mesmo. Clique em <a href="">adicionar quadro</a>.</p>
             </div>
 
         </div>
@@ -274,28 +270,45 @@ https://dribbble.com/shots/15813204-Finance-Dashboard
 
 {{/if}}
 
+
+
     <!-- Modal -->
 <div class="modal fade" id="adicionarQuadro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar quadro</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Quadro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/adicionar/tarefa" method="POST">
+            <form action="/criar/quadro" method="POST">
                 <div class="modal-body">
 
                     <div class="mb-3 row">
-                        <label for="editar-titulo-da-tarefa" class="col-sm-2 col-form-label">Titulo:</label>
+                        <label for="titulo-do-quadro" class="col-sm-2 col-form-label">Titulo:</label>
                         <div class="col-sm-10">
-                        <input type="text" name="titulo" class="form-control" id="editar-titulo-da-tarefa">
+                        <input type="text" name="titulo" class="form-control" id="titulo-do-quadro">
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <label for="descricao-do-quadro" class="col-sm-2 col-form-label">Descrição:</label>
+                        <div class="col-sm-10">
+                        <input type="text" name="descricao" class="form-control" id="descricao-do-quadro">
+                        </div>
+                    </div>
+                    <div class="mb-3 row" style="display: none;">
+                        <label for="areaId-do-quadro" class="col-sm-2 col-form-label">AreaId:</label>
+                        <div class="col-sm-10">
+                            {{#if areaDeTrabalho}}
+                        <input type="text" name="areaId" class="form-control" id="areaId-do-quadro" value="{{areaDeTrabalho.dataValues.id}}">
+                            {{/if}}
+                        </div>
+                    </div>
+                    
                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
-                    <button type="button" class="btn btn-primary">Adicionar Nova Tarefa</button>
+                    <button type="submit" class="btn btn-primary">Adicionar Novo Quadro</button>
                 </div>
             </form> 
         </div>

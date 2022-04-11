@@ -15,6 +15,7 @@
             <label for="email">E-mail</label>
             <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="email" name="email" id="email" value="{{email}}">
             {{#if erroEmailNaoPodeSerVazio}}<small style="color: red; padding-top: 5px;">{{erroEmailNaoPodeSerVazio.sobreNaoPodeSerVazio}}</small>{{/if}}
+            {{#if erroEmailJaExiste}}<small style="color: red; padding-top: 5px;">{{erroEmailJaExiste.emailJaExiste}}</small>{{/if}}
         
             <br>
 
@@ -26,13 +27,15 @@
 
             <label for="senha">Digite uma Senha</label>
             <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="password" name="senha" id="senha">
-            {{#if senhaErrada}}<small style="color: red; padding-top: 5px;">Erro ao digitar a senha. Favor tente novamente</small>{{/if}}
+            {{#if erroSenhaNaoPodeSerVazio}}<small style="color: red; padding-top: 5px;">{{erroSenhaNaoPodeSerVazio.senhaNaoPodeSerVazio}}</small>{{/if}}
 
             <br>
 
             <label for="confirmarSenha">Confirmar Senha</label>
             <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="password" name="confirmarSenha" id="confirmarSenha">
-            {{#if senhaErrada}}<small style="color: red; padding-top: 5px;">Erro ao digitar a senha. Favor tente novamente</small>{{/if}}
+            {{#if erroSenhaNaoPodeSerVazio}}<small style="color: red; padding-top: 5px;">{{erroSenhaNaoPodeSerVazio.senhaNaoPodeSerVazio}}</small>{{/if}}
+            {{#if erroSenhaNaoConfere}}<small style="color: red; padding-top: 5px;">{{erroSenhaNaoConfere.senhaNaoConfere}}</small>{{/if}}
+
             
             <button id="submit" type="submit" class="btn" style="color: #fff; background-color: blue; border-radius: 25px; margin-top: 25px;">Logar</button>
 

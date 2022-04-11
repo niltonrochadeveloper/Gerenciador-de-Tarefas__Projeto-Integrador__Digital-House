@@ -47,7 +47,11 @@
     </div>
     <a href="/"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Início</span></li></a>
     <a href="/quadros"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Quadros</span></li></a>
-    <a href="/area-de-trabalho" target="_BLANK"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Àrea de Trabalho</span></li></a>
+    <a href="/area-de-trabalho"><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Àrea de Trabalho</span></li></a>
+    {{#each todasAsAreasDeTrabalho}}
+    <a href="/area-de-trabalho/{{dataValues.id}}"><li><span class="navbarLi" style="padding-left: 30px;">{{dataValues.titulo}}</span></li></a>
+    {{else}}
+    {{/each}}
     <a href=""><li><i class='bx bx-user bx-sm'></i><span class="navbarLi">Tarefas</span></li></a>
   </div>
   <div>

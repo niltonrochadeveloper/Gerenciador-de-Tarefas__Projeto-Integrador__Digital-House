@@ -14,9 +14,6 @@ module.exports = {
       descricao: {
         type: Sequelize.STRING
       },
-      tarefaId: {
-        type: Sequelize.INTEGER
-      },
       areaId: {
         type: Sequelize.INTEGER
       },

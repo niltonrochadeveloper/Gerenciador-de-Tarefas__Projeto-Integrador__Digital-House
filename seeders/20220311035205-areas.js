@@ -10,13 +10,6 @@ module.exports = {
       usuarioId: '1',
       createdAt: new Date(),
       updatedAt: new Date()
-    }, {
-      titulo: 'Segunda Área',
-      descricao: 'Segunda Área',
-      link: '/segunda-area',
-      usuarioId: '1',
-      createdAt: new Date(),
-      updatedAt: new Date()
     }], {});
  
   },

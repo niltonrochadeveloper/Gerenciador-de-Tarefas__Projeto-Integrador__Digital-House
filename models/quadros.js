@@ -22,8 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Quadros.init({
     titulo: DataTypes.STRING,
     descricao: DataTypes.STRING,
-    areaId: DataTypes.INTEGER,
-    tarefaId: DataTypes.INTEGER
+    areaId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Quadros',

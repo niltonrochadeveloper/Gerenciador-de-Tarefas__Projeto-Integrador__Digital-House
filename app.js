@@ -74,6 +74,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth')
 const adminRouter = require('./routes/admin')
+const createRouter = require('./routes/create')
+const updateRouter = require('./routes/update')
+const deleteRouter = require('./routes/delete')
 
 //usando a rota importada 
 app.use('/', indexRouter)
@@ -84,6 +87,14 @@ app.use('/', authRouter)
 //administrador
 app.use('/admin', adminRouter)
 
+//create
+app.use('/criar', createRouter)
+
+//update
+app.use('/atualizar', updateRouter)
+
+// destroy
+app.use('/deletar/', deleteRouter)
 
 
 //servidor local onde vai rodar a aplicação

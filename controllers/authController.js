@@ -117,11 +117,13 @@ const controller = {
     cadastrar_novo_usuario_post: async (req, res) => {
         try {
 
-            var erros = []
             var erroNomeNaoPodeSerVazio = []
             var erroSobreNaoPodeSerVazio = []
-            // var erroNomeNaoPodeSerVazio = []
-            // var erroNomeNaoPodeSerVazio = []
+            var erroEmailNaoPodeSerVazio = []
+            var erroEmailJaExiste = []
+            var erroSenhaNaoPodeSerVazio = []
+            var erroConfirmarSenhaNaoPodeSerVazio = []
+            var erroSenhaNaoConfere = []
                         
             const { nome, sobre, email, senha, confirmarSenha } = req.body
 
@@ -134,29 +136,44 @@ const controller = {
                 erroSobreNaoPodeSerVazio.push({sobreNaoPodeSerVazio: "O campo sobre não pode ser vazio"})
             }
 
+            const emailJaExiste = await models.Usuarios.findOne({
+                where: {
+                    email: email
+                }
+            })
+
+            if(emailJaExiste) {
+                erroEmailJaExiste.push({emailJaExiste: "Este e-mail está sendo usado por outro usuário."})
+            }
+
             if(!email || typeof email == undefined || email == null || email == "") {
-                erros.push({emailNaoPodeSerVazio: "O campo e-mail não pode ser vazio"})
+                erroEmailNaoPodeSerVazio.push({emailNaoPodeSerVazio: "O campo e-mail não pode ser vazio"})
             }
 
             if(!senha || typeof senha == undefined || senha == null || senha == "") {
-                erros.push({senhaNaoPodeSerVazio: "O campo senha não pode ser vazio"})
+                erroSenhaNaoPodeSerVazio.push({senhaNaoPodeSerVazio: "O campo senha não pode ser vazio"})
             }
 
             if(!confirmarSenha || typeof confirmarSenha == undefined || confirmarSenha == null || confirmarSenha == "") {
-                erros.push({confirmarSenhaNaoPodeSerVazio: "O campo confirmarSenha não pode ser vazio"})
+                erroConfirmarSenhaNaoPodeSerVazio.push({confirmarSenhaNaoPodeSerVazio: "O campo confirmar Senha não pode ser vazio"})
             }
 
             var confirmarSenhaHash = bcrypt.hashSync(confirmarSenha, salt)
             const senhaConfirmada = bcrypt.compareSync(senha, confirmarSenhaHash);
 
             if(!senhaConfirmada) {
-                erros.push({senhaNaoConfere: "Senha digitada não confere"})
+                erroSenhaNaoConfere.push({senhaNaoConfere: "Senha digitada não confere"})
             } else {
                 var senhaHash = bcrypt.hashSync(senha, salt)
             }
 
-            if(erros.length > 0) {
-                // res.send(erros)
+            if(erroNomeNaoPodeSerVazio.length > 0 || erroSobreNaoPodeSerVazio.length > 0 || erroEmailNaoPodeSerVazio.length > 0 || erroEmailJaExiste.length > 0 || erroSenhaNaoPodeSerVazio.length > 0 || erroConfirmarSenhaNaoPodeSerVazio.length > 0 || erroSenhaNaoConfere.length > 0) {
+                         
+                
+                console.log(erroSenhaNaoConfere.length + "<br>" + email + '<br>' + sobre + '<br>' + senhaHash)
+
+                
+
                 res.render('cadastrar', {
                     title: "Cadastrar Novo Usuário no Task Manager PRO",
                     layout: 'no',
@@ -164,45 +181,78 @@ const controller = {
                     sobre: sobre,
                     email: email,
                     erroNomeNaoPodeSerVazio: erroNomeNaoPodeSerVazio[0],
-                    erroSobreNaoPodeSerVazio: erroSobreNaoPodeSerVazio[0]
+                    erroSobreNaoPodeSerVazio: erroSobreNaoPodeSerVazio[0],
+                    erroEmailNaoPodeSerVazio: erroEmailNaoPodeSerVazio[0],
+                    erroEmailJaExiste: erroEmailJaExiste[0],
+                    erroSenhaNaoPodeSerVazio: erroSenhaNaoPodeSerVazio[0],
+                    erroConfirmarSenhaNaoPodeSerVazio: erroConfirmarSenhaNaoPodeSerVazio[0],
+                    erroSenhaNaoConfere: erroSenhaNaoConfere[0]
 
                 })
+
             } else {
 
                 const novoUsuarioCriadoComSucesso = await models.Usuarios.create({
-                    nome: nome,                
+                    nome: nome,    
+                    email: email,            
                     sobre: sobre,
-                    email: email,
                     senha: senhaHash,
                 })
 
-                if(novoUsuarioCriadoComSucesso) {
-                    res.send('usuário criado com sucesso!')
-                } else {
-                    res.render('cadastrar', {
-                        title: "Cadastrar Novo Usuário no Task Manager PRO",
-                        layout: 'no',
-                        nome: nome,
-                        sobre: sobre,
-                        email: email,
-                        erroNomeNaoPodeSerVazio: erroNomeNaoPodeSerVazio[0],
-                        erroSobreNaoPodeSerVazio: erroSobreNaoPodeSerVazio[0]
-    
-                    })
+
+               async function autenticandoNovoUsuario() {
+                   
+                const usuario = await models.Usuarios.findOne({
+                    where: {
+                        email: email
+                    }
+                })
+                
+                const logado = {
+                    autenticado: {
+                        id: usuario['id'],
+                        nome: usuario['nome'],
+                        email: usuario['email'],
+                        sobre: usuario['sobre'],
+                        admin: usuario['nivelId']
+                    }
                 }
+
+                res.locals.authenticated.push(logado)
+
+                if(res.locals.authenticated[0].autenticado.admin === 1) {
+                    res.locals.isAdmin.push(true)
+                    req.session.isAdmin = true
+                }                
+
+                req.session.authenticated = logado.autenticado
+
+                const createNovaArea = await models.Areas.create({
+                    titulo: 'Nova Área de ' + logado.autenticado.nome,
+                    descricao: '',
+                    link: '',
+                    usuarioId: logado.autenticado.id
+                })
+
+               }
+
+               await autenticandoNovoUsuario().then(sucesso => {
+                res.redirect('/')
+               }).catch(erro => {
+                   res.redirect('/cadastrar')
+               })
+                
+                
 
             }
 
             
 
-            // if(!novoUsuarioCriadoComSucesso) {
-            //     res.re
-            // }
-
 
 
         } catch(erro) {
-            res.redirect('/cadastrar')
+
+            res.send(erro)
         }
     },
     logout: async (req, res) => {

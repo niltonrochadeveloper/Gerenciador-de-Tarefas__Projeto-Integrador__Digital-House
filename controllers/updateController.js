@@ -2,10 +2,10 @@
 const models = require('../models')
 
 const controller = {
-    index: async (req, res) => {
+    atualizar_tarefa_de_quadro_post: async (req, res) => {
         try {
-            if(req.session.authenticated && req.session.isAdmin) {
-                res.render('admin/usuarios')
+            if(req.session.authenticated) {
+                res.send('atualizar tarefa de quadro')
             } else {
                 res.redirect('/')
             }

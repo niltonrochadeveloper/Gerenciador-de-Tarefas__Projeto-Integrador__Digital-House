@@ -25,7 +25,10 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     sobre: DataTypes.STRING,
     senha: DataTypes.STRING,
-    nivelId: DataTypes.INTEGER
+    nivelId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 3
+    }
   }, {
     sequelize,
     modelName: 'Usuarios',
