@@ -80,6 +80,7 @@ const controller = {
                 // console.log(res.locals.isAdmin[0])
                 // console.log("Senha correta  ");
 
+                // req.flash('success_msg', 'Usuário logado.')
                 res.redirect('/')
 
             } else {
@@ -111,6 +112,7 @@ const controller = {
                 layout: 'no'
             })
         } catch(erro) {
+            req.flash('error_msg', 'Houve algum erro na página. Erro: '+ erro)
             res.redirect('/login')
         }
     },
@@ -126,7 +128,6 @@ const controller = {
             var erroSenhaNaoConfere = []
                         
             const { nome, sobre, email, senha, confirmarSenha } = req.body
-
 
             if(!nome || typeof nome == undefined || nome == null || nome == "") {
                 erroNomeNaoPodeSerVazio.push({nomeNaoPodeSerVazio: "O campo nome não pode ser vazio"})
@@ -169,11 +170,6 @@ const controller = {
 
             if(erroNomeNaoPodeSerVazio.length > 0 || erroSobreNaoPodeSerVazio.length > 0 || erroEmailNaoPodeSerVazio.length > 0 || erroEmailJaExiste.length > 0 || erroSenhaNaoPodeSerVazio.length > 0 || erroConfirmarSenhaNaoPodeSerVazio.length > 0 || erroSenhaNaoConfere.length > 0) {
                          
-                
-                console.log(erroSenhaNaoConfere.length + "<br>" + email + '<br>' + sobre + '<br>' + senhaHash)
-
-                
-
                 res.render('cadastrar', {
                     title: "Cadastrar Novo Usuário no Task Manager PRO",
                     layout: 'no',
@@ -237,27 +233,25 @@ const controller = {
                }
 
                await autenticandoNovoUsuario().then(sucesso => {
-                res.redirect('/')
+                    req.flash('success_msg', 'Usuário Criado e Autênticado.')
+                    res.redirect('/')
                }).catch(erro => {
+                   req.flash('error_msg', 'Houve algum erro na autênticaçao: Erro:' + erro)
                    res.redirect('/cadastrar')
                })
-                
-                
 
             }
-
-            
-
-
 
         } catch(erro) {
 
             res.send(erro)
         }
-    },
-    logout: async (req, res) => {
 
-        req.session.destroy() 
+    },
+    
+    logout: async (req, res) => {
+        
+        req.session.destroy()
         res.status(200).redirect('/')
 
     }

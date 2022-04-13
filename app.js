@@ -14,15 +14,19 @@ var saltRounds = 10
 var salt = bcrypt.genSaltSync(saltRounds)
 // var hash = bcrypt.hashSync(senha, salt);
 
+//configurações
+
 //json
 app.use(express.json());
 
-//configurações
 
-var minute = 60000
 
+//cookies
+app.use(cookieParser());
 
 // config session
+var minute = 60000
+
 app.use(session({
     secret: 'meu_segredo',
     cookie: {
@@ -32,21 +36,23 @@ app.use(session({
     saveUninitialized: true
 }));
 
-//cookies
-app.use(cookieParser());
+// req flash
+app.use(flash())    
 
-app.use( async(req, res, next) => {
 
+app.use((req, res, next) => {
+
+    // auth config
     res.locals.authenticated = []
     res.locals.isAdmin = []
 
+    // flash config
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.error_msg = req.flash('error_msg')
+
+    //authenticated and admin config
     const authenticated = req.session.authenticated
     const isAdmin = req.session.isAdmin 
-
-    // console.log(authenticated)
-    // console.log(req.session)
-    // console.log(authenticated)
-    // console.log(isAdmin)
     
     next()
 

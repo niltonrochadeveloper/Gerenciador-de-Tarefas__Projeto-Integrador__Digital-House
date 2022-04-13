@@ -1,9 +1,17 @@
 
-<style>
-    .scroll_quadro::-webkit-scrollbar {
-  width: 12px;
-}
-</style>
+{{#if success_msg}}
+<div class="alert alert-success" style="max-width: 280px; position: absolute;" role="alert">
+  {{success_msg}}
+</div>    
+{{/if}}
+
+{{#if error_msg}}
+<div class="alert alert-danger" style="max-width: 280px; position: absolute;" role="alert">
+  {{error_msg}}
+</div>    
+{{/if}}
+
+
 {{#if quadrosAreaDeTrabalho}}
 <section style="overflow: hidden; height: 100%;">
     <article class="container" style="display: flex; flex-wrap: wrap; height: 100%;">
@@ -18,8 +26,7 @@
                 <h5 style="font-size: 18px; font-weight: 700; margin-top: 10px;">{{dataValues.titulo}}</h5>
                 {{#if ../isAdmin}}<a style="width: 50px; text-align: center;" data-bs-toggle="modal" data-bs-target="#excluirQuadro{{dataValues.id}}" href="#">deletar</a>{{/if}}
 
-
-                <div class="scroll_quadro" style="height: 84%; width: 100%; margin-top: 15px;">
+                <div style="overflow-y: scroll; height: 84%; width: 100%; margin-top: 15px;">
                     
                     <!-- Tarefa -->
                     {{#each tarefas}}
@@ -37,7 +44,7 @@
                 </div>
 
                 <div style="display: flex; justify-self: flex-end; align-self: flex-end; position: absolute; bottom: 18px;">
-                    <a data-bs-toggle="modal" data-bs-target="#myModal{{dataValues.id}}" href="#" style="color: #fff; background-color: #FDA040; padding: 3px 15px 2px 15px; border-radius: 25px; font-size: 12px; align-self: flex-end;">
+                    <a data-bs-toggle="modal" data-bs-target="#adicionarTarefa{{dataValues.id}}" href="" style="color: #fff; background-color: #FDA040; padding: 3px 15px 2px 15px; border-radius: 25px; font-size: 12px; align-self: flex-end;">
                         Adicionar Tarefa
                     </a>
                 </div>
@@ -59,7 +66,7 @@
 
 {{#each quadrosAreaDeTrabalho}}
 <!-- Modal -->
-<div class="modal fade" id="myModal{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="adicionarTarefa{{dataValues.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,13 +89,70 @@
                         <textarea name="conteudo" class="form-control" id="editar-conteudo-da-tarefa" rows="10">{{dataValues.conteudo}}</textarea>
                         </div>
                     </div>
+
+                    <div class="mb-3 row">
+                        <label for="editar-link-da-tarefa" class="col-sm-2 col-form-label">Link:</label>
+                        <div class="col-sm-10">
+                        <input type="text" name="link" class="form-control" id="editar-link-da-tarefa">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="editar-quadroId-da-tarefa" class="col-sm-2 col-form-label">QuadroId:</label>
+                        <div class="col-sm-10">
+                        <input type="text" name="quadroId" class="form-control" id="editar-quadroId-da-tarefa" value="{{dataValues.id}}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="editar-prazo-da-tarefa" class="col-sm-2 col-form-label">Prazo:</label>
+                        <div class="col-sm-10">
+                        <input type="date" name="prazo" class="form-control" id="editar-prazo-da-tarefa">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="editar-usuarioId-da-tarefa" class="col-sm-2 col-form-label">Criado por:</label>
+                        <div class="col-sm-10 mt-2">
+                        <span>{{../usuario.dataValues.nome}}</span>
+                        <input type="text" name="usuarioId" class="form-control d-none" id="editar-usuarioId-da-tarefa" value="{{../usuario.dataValues.id}}">
+                        </div>
+                    </div>
+
+                    
+                    <div class="mb-3 row">
+                        <label for="editar-tagId-da-tarefa" class="col-sm-2 col-form-label">TagId:</label>
+                        <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example" type="text" name="tagId" class="form-control" id="editar-tagId-da-tarefa" >
+                            {{!-- <option selected>Selecione uma Tag</option> --}}
+                            {{#each ../tags}}
+                            <option value="{{dataValues.id}}">{{dataValues.titulo}}</option>
+                            {{/each}}
+                        </select>
+                        </div>
+                    </div>
+                    
+
+                    <div class="mb-3 row">
+                        <label for="editar-rascunhoId-da-tarefa" class="col-sm-2 col-form-label">RascunhoId:</label>
+                        <div class="col-sm-10">
+                        <input type="text" name="rascunhoId" class="form-control" id="editar-rascunhoId-da-tarefa">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="editar-comentarioId-da-tarefa" class="col-sm-2 col-form-label">ComentarioId:</label>
+                        <div class="col-sm-10">
+                        <input type="text" name="comentarioId" class="form-control" id="editar-comentarioId-da-tarefa">
+                        </div>
+                    </div>
                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
-                    <button type="button" class="btn btn-primary">Adicionar Nova Tarefa</button>
+                    <button type="submit" class="btn btn-primary">Adicionar Nova Tarefa</button>
                 </div>
-            </form> 
+            </form>
         </div>
     </div>
 </div>
@@ -185,7 +249,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-            <a href="/deletar/tarefa/{{dataValues.id}}"><button type="button" class="btn btn-primary">Excluir Definitivamente</button></a>
+            <a href="/deletar/tarefa/{{dataValues.id}}"><button type="button" class="btn btn-danger">Excluir Definitivamente</button></a>
         </div>
         </div>
     </div>

@@ -30,6 +30,8 @@ const controller = {
             
         })
 
+        const tags = await models.Tags.findAll()
+
         const todasAsAreasDeTrabalho = await models.Areas.findAll({
             
             where: {
@@ -74,10 +76,11 @@ const controller = {
        
         res.render('index', {
             title: 'Task Manager PRO',
-            usuario: usuario,
-            todasAsAreasDeTrabalho: todasAsAreasDeTrabalho,
-            areaDeTrabalho: areaDeTrabalho,
-            quadrosAreaDeTrabalho: quadrosAreaDeTrabalho,
+            usuario,
+            tags,
+            todasAsAreasDeTrabalho,
+            areaDeTrabalho,
+            quadrosAreaDeTrabalho,
             authenticated: req.session.authenticated,
             isAdmin: req.session.isAdmin
         })

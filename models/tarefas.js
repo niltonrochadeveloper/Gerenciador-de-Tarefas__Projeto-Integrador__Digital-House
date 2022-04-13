@@ -33,9 +33,13 @@ module.exports = (sequelize, DataTypes) => {
     conteudo: DataTypes.STRING,
     link: DataTypes.STRING,
     prazo: DataTypes.DATE,
+    quadroId: DataTypes.INTEGER,
     usuarioId: DataTypes.INTEGER,
     tagId: DataTypes.INTEGER,
-    rascunhoId: DataTypes.INTEGER,
+    rascunhoId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1
+    },
     comentarioId: DataTypes.INTEGER
   }, {
     sequelize,

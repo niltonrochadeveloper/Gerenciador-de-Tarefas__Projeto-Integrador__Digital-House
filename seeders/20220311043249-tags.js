@@ -4,12 +4,19 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     
     await queryInterface.bulkInsert('Tags', [{
+      titulo: 'sem tag',
+      descricao: 'não possui uma tag',
+      areaId: '1',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
       titulo: 'marketing',
       descricao: 'uma tarefa para o departamento de Marketing',
       areaId: '1',
       createdAt: new Date(),
       updatedAt: new Date()
-    }, {
+    },
+    {
       titulo: 'produtos',
       descricao: 'uma tarefa para o departamento de produtos',
       areaId: '1',
