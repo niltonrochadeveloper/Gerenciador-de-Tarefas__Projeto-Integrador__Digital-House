@@ -10,8 +10,16 @@ const controller = {
                         id: req.params.id
                     }
                 })
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
 
-                res.redirect('/')
+                req.flash('success_msg', 'Usuário deletado com sucesso')
+                res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
             } else {
                 res.redirect('/')
             }
@@ -29,6 +37,15 @@ const controller = {
                     }
                 })
 
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
+
+                req.flash('success_msg', 'Área deletada com sucesso')
                 res.redirect('/')
             } else {
                 res.redirect('/')
@@ -47,7 +64,16 @@ const controller = {
                     }
                 })
 
-                res.redirect('/')
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
+
+                req.flash('success_msg', 'Quadro deletado com sucesso')
+                res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
             } else {
                 res.redirect('/')
             }
@@ -65,7 +91,16 @@ const controller = {
                     }
                 })
 
-                res.redirect('/')
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
+
+                req.flash('success_msg', 'Tarefa deletada com sucesso')
+                res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
             } else {
                 res.redirect('/')
             }
@@ -83,7 +118,16 @@ const controller = {
                     }
                 })
 
-                res.redirect('/')
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
+
+                req.flash('success_msg', 'Comentário deletado com sucesso')
+                res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
             } else {
                 res.redirect('/')
             }

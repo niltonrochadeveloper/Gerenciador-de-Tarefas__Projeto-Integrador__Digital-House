@@ -5,177 +5,170 @@ const bcrypt = require('bcryptjs')
 
 const controller = {
     index: async (req, res) => {
+        try {
 
         if(req.session.authenticated) {
+           
+        
 
-        const usuario = await models.Usuarios.findOne({
-            whre: {
-                email: req.session.authenticated.email
+        const todasAsAreasDeTrabalho = await models.Areas.findAll({
+                
+            where: {
+                usuarioId: req.session.authenticated.id
             },
             include: [
                 {
-                    association: "areas",
-                where: {
-                    id: req.session.authenticated.id
+                    association: 'quadros',
+                    include: [
+                        { 
+                            association: "tarefas",
+                            include: [
+                                {
+                                    association: "usuarios"
+                                },
+                                {
+                                    association: "tags"
+                                },
+                                {
+                                    association: "rascunhos"
+                                },
+                                {
+                                    association: "comentarios",
+                                    include: [
+                                        {
+                                            association: "usuarios"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }          
+                    ] 
                 }
-            }
-            ]
-        })
-
-        const areaDeTrabalho = await models.Areas.findOne({
-            
-            where: {
-                usuarioId: req.session.authenticated.id
-            }              
+            ]              
             
         })
 
-        const tags = await models.Tags.findAll()
+        somaDeTarefas = 0        
 
-        const todasAsAreasDeTrabalho = await models.Areas.findAll({
-            
-            where: {
-                usuarioId: req.session.authenticated.id
-            }              
-            
-        })
+        for(var i=0; i < todasAsAreasDeTrabalho[0].dataValues.quadros.length; i++) {
+            somaDeTarefas += (todasAsAreasDeTrabalho[0].dataValues.quadros[i].dataValues.tarefas.length)
+        }
 
-        const quadrosAreaDeTrabalho = await models.Quadros.findAll({
-            where: {
-            AreaId: areaDeTrabalho.id
-        },
-        include: [
-            { 
-                association: "tarefas",
-                include: [
-                    {
-                        association: "usuarios"
-                    },
-                    {
-                        association: "tags"
-                    },
-                    {
-                        association: "rascunhos"
-                    },
-                    {
-                        association: "comentarios",
-                        include: [
-                            {
-                                association: "usuarios"
-                            }
-                        ]
-                    }
-                ]
-            }          
-        ]     
+        const qtdeDeQuadros = todasAsAreasDeTrabalho[0].dataValues.quadros.length
 
-    })
-
-    
-    // console.log(todasAsAreasDeTrabalho)
-       
         res.render('index', {
             title: 'Task Manager PRO',
-            usuario,
-            tags,
+            areaId: req.params.id,
+            qtdeDeQuadros,
+            somaDeTarefas,
             todasAsAreasDeTrabalho,
-            areaDeTrabalho,
-            quadrosAreaDeTrabalho,
             authenticated: req.session.authenticated,
             isAdmin: req.session.isAdmin
         })
-
     } else {
         res.redirect('/login')
     }
 
+
+    } catch(erro) {
+        res.redirect('/')
+    }
+
     },
     areasdetrabalho: async (req, res) => {
-        try{
+        try {
 
-            if(!req.session.authenticated) {
-                res.redirect('/')
-            }
-
-            const idDoQuadro= req.params.id
-
-               const usuario = await models.Usuarios.findOne({
-            whre: {
-                email: req.session.authenticated.email
-            },
-            include: [
-                {
-                    association: "areas",
-                where: {
-                    id: req.session.authenticated.id
-                }
-            }
-            ]
-        })
-
-        const areaDeTrabalho = await models.Areas.findOne({
-            
-            where: {
-                usuarioId: req.session.authenticated.id
-            }              
-            
-        })
-
-        const todasAsAreasDeTrabalho = await models.Areas.findAll({
-            
-            where: {
-                usuarioId: req.session.authenticated.id
-            }              
-            
-        })
-
-        const quadrosAreaDeTrabalho = await models.Quadros.findAll({
-            where: {
-            AreaId: areaDeTrabalho.id
-        },
-        include: [
-            { 
-                association: "tarefas",
+            if(req.session.authenticated) {
+    
+            const usuario = await models.Usuarios.findOne({
+                whre: {
+                    email: req.session.authenticated.email
+                },
                 include: [
                     {
-                        association: "usuarios"
-                    },
-                    {
-                        association: "tags"
-                    },
-                    {
-                        association: "rascunhos"
-                    },
-                    {
-                        association: "comentarios",
-                        include: [
-                            {
-                                association: "usuarios"
-                            }
-                        ]
+                        association: "areas",
+                    where: {
+                        id: req.session.authenticated.id
                     }
+                }
                 ]
-            }          
-        ]     
-
-    })
-
-       
-    res.render('index', {
-        title: 'Task Manager PRO',
-        usuario: usuario,
-        todasAsAreasDeTrabalho: todasAsAreasDeTrabalho,
-        areaDeTrabalho: areaDeTrabalho,
-        quadrosAreaDeTrabalho: quadrosAreaDeTrabalho,
-        authenticated: req.session.authenticated,
-        isAdmin: req.session.isAdmin
-    })
-
-        } catch(erro) {
-            res.redirect('/')
+            })
+    
+            const areaDeTrabalho = await models.Areas.findOne({
+                
+                where: {
+                    usuarioId: req.session.authenticated.id
+                }              
+                
+            })
+    
+            const tags = await models.Tags.findAll()
+            const rascunhos = await models.Rascunhos.findAll()
+    
+            const todasAsAreasDeTrabalho = await models.Areas.findAll({
+                
+                where: {
+                    usuarioId: req.session.authenticated.id
+                }              
+                
+            })
+    
+            
+    
+            const quadrosAreaDeTrabalho = await models.Quadros.findAll({
+                where: {
+                areaId: areaDeTrabalho.id || req.params.id
+            },
+            include: [
+                { 
+                    association: "tarefas",
+                    include: [
+                        {
+                            association: "usuarios"
+                        },
+                        {
+                            association: "tags"
+                        },
+                        {
+                            association: "rascunhos"
+                        },
+                        {
+                            association: "comentarios",
+                            include: [
+                                {
+                                    association: "usuarios"
+                                }
+                            ]
+                        }
+                    ]
+                }          
+            ]     
+    
+        })
+    
+        
+        // console.log(todasAsAreasDeTrabalho)
+           
+            res.render('area', {
+                title: 'Task Manager PRO' + req.params.id,
+                areaId: req.params.id,
+                usuario,
+                tags,
+                rascunhos,
+                todasAsAreasDeTrabalho,
+                areaDeTrabalho,
+                quadrosAreaDeTrabalho,
+                authenticated: req.session.authenticated,
+                isAdmin: req.session.isAdmin
+            })
+    
+        } else {
+            res.redirect('/login')
         }
-
-
+    
+    } catch(erro) {
+        res.redirect('/')
+    }
     },
     adicionarQuadro: async (req, res) => {
 

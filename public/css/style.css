@@ -19,6 +19,39 @@ a {
     color: #000;
 }
 
+  nav {
+    color: #fff;
+  }
+
+  nav div div {
+    color: #fff;
+  }
+
+  nav div a li {
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    list-style: none;
+  }
+
+  nav div a li i {
+    padding-right: 10px;
+   
+  }
+  nav div a li:hover {
+    background-color: #6d8ead;
+    border-radius: 10px;
+  }
+
+  nav {
+    display: flex; justify-content: space-between; flex-direction: column; height: 100%; padding: 0 15px;
+  }
+
+  nav > div {
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
 /* Quadros */
 .adicionarQuadro {
     background-color: blue;

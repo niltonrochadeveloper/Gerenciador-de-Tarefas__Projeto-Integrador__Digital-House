@@ -20,7 +20,8 @@ const controller = {
 
                 const novoQuadroCriado = await models.Quadros.create(dadosParaCriarONovoQuadro)
 
-                res.redirect('/')
+                req.flash('success_msg', 'Quadro criado com sucesso')
+                res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
             } else {
                 res.redirect('/')
             }
@@ -65,8 +66,18 @@ const controller = {
 
                 console.log(novaTarefaCriada)
 
-                req.flash('success_msg', 'Tarefa criada')
-                res.redirect('/')
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
+
+
+
+                req.flash('success_msg', 'Tarefa criada com sucesso')
+                res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
             
         } catch(erro) {
             req.flash('error_msg', 'Náo foi possivel criar o quadro. Erro: '+ erro)
@@ -76,22 +87,34 @@ const controller = {
     },
     criar_comentario_post: async (req, res) => {
         try {
-            if(req.session.authenticated) {
+            if(!req.session.authenticated) {
+                res.redirect('/')
+            }
+
 
                 const dadosParaCriarONovoComentario = {
                     conteudo: req.body.conteudo,
-                    link: req.body.link,
-                    arquivoId: req.body.arquivoId,
-                    usuarioId: req.body.usuarioId,
-                    tarefaId: req.body.tarefaId
+                    link: "'/' + {{dataValues.tarefaId}} + '/' + {{dataVAlues.usuarioId}}",
+                    arquivoId: JSON.parse(req.body.tarefaId),
+                    usuarioId: req.session.authenticated.id,
+                    tarefaId: JSON.parse(req.body.tarefaId)
                 }
 
-                const novoComentarioCriado = await models.COmentarios.create(dadosParaCriarONovoComentario)
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
 
-                res.redirect('/')
-            } else {
-                res.redirect('/')
-            }
+                // res.send(dadosParaCriarONovoComentario)
+
+                const novoComentarioCriado = await models.Comentarios.create(dadosParaCriarONovoComentario)
+
+                req.flash('success_msg', 'Comentário criado com sucesso')
+                res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
+            
         } catch(erro) {
             res.redirect('/')
         }
