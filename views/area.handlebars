@@ -12,6 +12,10 @@
 {{/if}}
 
 
+            <!--Botão de Acrescentar Quadro-->
+            <div class="adicionarQuadro" style="z-index: 100; margin: 8px 0 0 0; box-shadow: 1px 1px 5px 0px #D2D2D2; border-radius: 10px; position: absolute; right: 30px; top: 5px; padding: 10px;">
+                <a data-bs-toggle="modal" data-bs-target="#adicionarQuadro" href=""><span title="Adicionar Quadro" style="font-size: 16px; color: #fff; text-align: center; padding: 20px; ">+ Adicionar quadro</span></a>
+            </div>
 
 
 {{#if quadrosAreaDeTrabalho}}
@@ -171,7 +175,11 @@
                     <div class="mb-3 row">
                         <label for="editar-rascunhoId-da-tarefa" class="col-sm-2 col-form-label">RascunhoId:</label>
                         <div class="col-sm-10">
-                        <input type="text" name="rascunhoId" class="form-control" id="editar-rascunhoId-da-tarefa">
+                        <select name="rascunhoId" id="">
+                            {{#each ../rascunhos}}
+                            <option type="text" name="rascunhoId" class="form-control" id="editar-rascunhoId-da-tarefa" value="{{dataValues.id}}">{{dataValues.titulo}}</option>
+                            {{/each}}
+                        </select>
                         </div>
                     </div>
 

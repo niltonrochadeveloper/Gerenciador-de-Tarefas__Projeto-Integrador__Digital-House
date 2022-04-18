@@ -20,6 +20,14 @@ const controller = {
 
                 const novoQuadroCriado = await models.Quadros.create(dadosParaCriarONovoQuadro)
 
+                const areaDeTrabalho = await models.Areas.findOne({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    }              
+                    
+                })
+
                 req.flash('success_msg', 'Quadro criado com sucesso')
                 res.redirect('/area-de-trabalho/' + areaDeTrabalho.id)
             } else {

@@ -32,9 +32,6 @@ module.exports = {
       tagId: {
         type: Sequelize.INTEGER
       },
-      comentarioId: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

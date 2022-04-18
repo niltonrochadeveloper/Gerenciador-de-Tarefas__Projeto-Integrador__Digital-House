@@ -3,6 +3,8 @@ const models = require('../models/')
 
 const bcrypt = require('bcryptjs')
 
+
+
 const controller = {
     index: async (req, res) => {
         try {
@@ -185,7 +187,154 @@ const controller = {
 
     },
     rascunhos: async (req, res) => {
-        
+        try {
+
+            if(req.session.authenticated) {
+
+
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
+    },
+    todos_os_quadros: async (req, res) => {
+        try {
+
+            if(req.session.authenticated) {
+
+
+                res.render('quadros', {
+                    title: 'O meus quadros',
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
+    },
+    todas_as_areas: async (req, res) => {
+        try {
+
+            if(req.session.authenticated) {
+
+
+                res.render('area', {
+                    title: 'Minhas Áreas',
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
+    },
+    ajuda: async (req, res) => {
+        try {
+
+            if(req.session.authenticated) {
+
+                res.render('ajuda', {
+                    title: 'Central de Ajuda',
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
+    },
+    configuracoes: async (req, res) => {
+        try {
+
+            if(req.session.authenticated) {
+
+                res.render('configuracoes', {
+                    title: 'Configurações Gerais',
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
+    },
+    meu_perfil: async (req, res) => {
+        try {
+
+            if(req.session.authenticated) {
+
+                res.render('meu-perfil', {
+                    title: 'Meu Perfil de Usuário',
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
+    },
+    quadros: async (req, res) => {
+        try {
+
+            if(req.session.authenticated) {
+
+                res.render('quadros', {
+                    title: 'O meus quadros',
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
+    },
+    tarefas: async (req, res) => {
+        try {
+
+            if(req.session.authenticated) {
+
+                res.render('tarefas', {
+                    title: 'Minhas Tarefas',
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
     }
 }
 

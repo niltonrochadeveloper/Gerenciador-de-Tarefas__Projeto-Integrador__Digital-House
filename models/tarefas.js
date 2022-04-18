@@ -39,8 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     rascunhoId: {
       type: DataTypes.INTEGER,
       defaultValue: 1
-    },
-    comentarioId: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Tarefas',

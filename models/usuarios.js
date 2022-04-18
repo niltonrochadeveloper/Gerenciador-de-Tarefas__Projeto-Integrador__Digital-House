@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     senha: DataTypes.STRING,
     nivelId: {
       type: DataTypes.INTEGER,
-      defaultValue: 3
+      defaultValue: 1
     }
   }, {
     sequelize,
