@@ -35,15 +35,28 @@ const controller = {
 
             const { email, senha } = req.body
 
-            const usuario = await models.Usuarios.findOne({
-                where: {
-                    email: email
-                }
-            })
+            erroEmailNaoPodeSerVazio = []
+            erroSenhaNaoPodeSerVazio = []
 
-            if (!usuario) {
-                var usuarioNaoCadastrado = true
+            if(!senha || typeof senha == undefined || senha == null || senha == "") {
+                erroSenhaNaoPodeSerVazio.push({SenhaNaoPodeSerVazio: "O campo senha não pode ser vazio"})
             }
+
+            if(!email || typeof email == undefined || email == null || email == "") {
+                erroEmailNaoPodeSerVazio.push({emailNaoPodeSerVazio: "O campo e-mail não pode ser vazio"})
+                var usuarioNaoCadastrado = false
+            } else {
+                var usuario = await models.Usuarios.findOne({
+                    where: {
+                        email: email
+                    }
+                })
+    
+                if (!usuario) {
+                    var usuarioNaoCadastrado = true
+                }
+            }
+            
 
             if (usuario) {
 
@@ -76,20 +89,16 @@ const controller = {
 
                 req.session.authenticated = logado.autenticado
 
-                // console.log(res.locals.authenticated[0])
-                // console.log(res.locals.isAdmin[0])
-                // console.log("Senha correta  ");
-
-                // req.flash('success_msg', 'Usuário logado.')
                 res.redirect('/')
 
             } else {
 
-                // console.log(res.locals.authenticated)
-                // console.log("Senha errada");
-
                 res.render('login', {
                     layout: 'no',
+                    senha: senha,
+                    email: email,
+                    erroSenhaNaoPodeSerVazio: erroSenhaNaoPodeSerVazio[0],
+                    erroEmailNaoPodeSerVazio: erroEmailNaoPodeSerVazio[0],
                     usuarioNaoCadastrado: usuarioNaoCadastrado,
                     senhaErrada: senhaErrada
                 })
@@ -130,11 +139,15 @@ const controller = {
             const { nome, sobre, email, senha, confirmarSenha } = req.body
 
             if(!nome || typeof nome == undefined || nome == null || nome == "") {
-                erroNomeNaoPodeSerVazio.push({nomeNaoPodeSerVazio: "O campo nome não pode ser vazio"})
+                erroNomeNaoPodeSerVazio.push({nomeNaoPodeSerVazio: "O campo nome não pode ser vazio."})
             }
 
             if(!sobre || typeof sobre == undefined || sobre == null || sobre == "") {
-                erroSobreNaoPodeSerVazio.push({sobreNaoPodeSerVazio: "O campo sobre não pode ser vazio"})
+                erroSobreNaoPodeSerVazio.push({sobreNaoPodeSerVazio: "O campo sobre não pode ser vazio."})
+            }
+
+            if(!email || typeof email == undefined || email == null || email == "") {
+                erroEmailNaoPodeSerVazio.push({emailNaoPodeSerVazio: "O campo e-mail não pode ser vazio."})
             }
 
             const emailJaExiste = await models.Usuarios.findOne({
@@ -146,24 +159,21 @@ const controller = {
             if(emailJaExiste) {
                 erroEmailJaExiste.push({emailJaExiste: "Este e-mail está sendo usado por outro usuário."})
             }
-
-            if(!email || typeof email == undefined || email == null || email == "") {
-                erroEmailNaoPodeSerVazio.push({emailNaoPodeSerVazio: "O campo e-mail não pode ser vazio"})
-            }
+            
 
             if(!senha || typeof senha == undefined || senha == null || senha == "") {
-                erroSenhaNaoPodeSerVazio.push({senhaNaoPodeSerVazio: "O campo senha não pode ser vazio"})
+                erroSenhaNaoPodeSerVazio.push({senhaNaoPodeSerVazio: "O campo senha não pode ser vazio."})
             }
 
             if(!confirmarSenha || typeof confirmarSenha == undefined || confirmarSenha == null || confirmarSenha == "") {
-                erroConfirmarSenhaNaoPodeSerVazio.push({confirmarSenhaNaoPodeSerVazio: "O campo confirmar Senha não pode ser vazio"})
+                erroConfirmarSenhaNaoPodeSerVazio.push({confirmarSenhaNaoPodeSerVazio: "O campo confirmar Senha não pode ser vazio."})
             }
 
             var confirmarSenhaHash = bcrypt.hashSync(confirmarSenha, salt)
             const senhaConfirmada = bcrypt.compareSync(senha, confirmarSenhaHash);
 
             if(!senhaConfirmada) {
-                erroSenhaNaoConfere.push({senhaNaoConfere: "Senha digitada não confere"})
+                erroSenhaNaoConfere.push({senhaNaoConfere: "Senha digitada não confere. Tente novamente."})
             } else {
                 var senhaHash = bcrypt.hashSync(senha, salt)
             }
@@ -176,6 +186,7 @@ const controller = {
                     nome: nome,
                     sobre: sobre,
                     email: email,
+                    senha: senha,
                     erroNomeNaoPodeSerVazio: erroNomeNaoPodeSerVazio[0],
                     erroSobreNaoPodeSerVazio: erroSobreNaoPodeSerVazio[0],
                     erroEmailNaoPodeSerVazio: erroEmailNaoPodeSerVazio[0],

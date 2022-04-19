@@ -114,6 +114,8 @@ const controller = {
                 }              
                 
             })
+
+            
     
             
     
@@ -206,9 +208,47 @@ const controller = {
 
             if(req.session.authenticated) {
 
+                const todasAsAreasDeTrabalho = await models.Areas.findAll({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    },
+                    include: [
+                        {
+                            association: 'quadros',
+                            include: [
+                                { 
+                                    association: "tarefas",
+                                    include: [
+                                        {
+                                            association: "usuarios"
+                                        },
+                                        {
+                                            association: "tags"
+                                        },
+                                        {
+                                            association: "rascunhos"
+                                        },
+                                        {
+                                            association: "comentarios",
+                                            include: [
+                                                {
+                                                    association: "usuarios"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }          
+                            ] 
+                        }
+                    ]              
+                    
+                })
+
 
                 res.render('quadros', {
-                    title: 'O meus quadros',
+                    title: 'Os meus quadros',
+                    todasAsAreasDeTrabalho: todasAsAreasDeTrabalho,
                     authenticated: req.session.authenticated,
                     isAdmin: req.session.isAdmin
                 })

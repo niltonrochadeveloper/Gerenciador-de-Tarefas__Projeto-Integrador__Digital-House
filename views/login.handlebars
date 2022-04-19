@@ -7,14 +7,16 @@
             <br>
 
             <label for="email">E-mail</label>
-            <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="email" name="email" id="email">
-            {{#if usuarioNaoCadastrado}}<small style="color: red; padding-top: 5px;">Este usuário não existe. <a style="color: blue; text-decoration: none; font-size: 12px;" href="/cadastrar">cadastre-se.</a></small>{{/if}}
+            <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="email" name="email" id="email" value="{{email}}">
+            {{#if erroEmailNaoPodeSerVazio}}<small style="color: red; padding-top: 5px;">O campo e-mail não pode ser vazio.</small>{{/if}}
+            {{#if usuarioNaoCadastrado}}<small style="color: red; padding-top: 5px;">Este usuário não existe.<a style="color: blue; text-decoration: none; font-size: 12px;" href="/cadastrar"> Cadastre-se.</a></small>{{/if}}
         
             <br>
 
             <label for="senha">Senha</label>
-            <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="password" name="senha" id="senha">
-            {{#if senhaErrada}}<small style="color: red; padding-top: 5px;">Erro ao digitar a senha. Favor tente novamente</small>{{/if}}
+            <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="password" name="senha" id="senha" value="{{senha}}">
+            {{#if erroSenhaNaoPodeSerVazio}}<small style="color: red; padding-top: 5px;">O campo senha não pode ser vazio.</small>{{/if}}
+            {{#if senhaErrada}}<small style="color: red; padding-top: 5px;">Erro ao digitar a senha. Favor tente novamente.</small>{{/if}}            
             
             <button id="submit" type="submit" class="btn" style="color: #fff; background-color: blue; border-radius: 25px; margin-top: 25px;">Logar</button>
 

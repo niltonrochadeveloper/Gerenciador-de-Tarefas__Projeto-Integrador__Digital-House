@@ -10,7 +10,7 @@ router.get('/area-de-trabalho/:id', indexController.areasdetrabalho)
 router.get('/ajuda', indexController.ajuda)
 router.get('/meu-perfil', indexController.meu_perfil)
 router.get('/configuracoes', indexController.configuracoes)
-router.get('/quadros', indexController.quadros)
+router.get('/quadros', indexController.todos_os_quadros)
 router.get('/tarefas', indexController.tarefas)
 
 
