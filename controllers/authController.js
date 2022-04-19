@@ -135,6 +135,7 @@ const controller = {
             var erroSenhaNaoPodeSerVazio = []
             var erroConfirmarSenhaNaoPodeSerVazio = []
             var erroSenhaNaoConfere = []
+            
                         
             const { nome, sobre, email, senha, confirmarSenha } = req.body
 
