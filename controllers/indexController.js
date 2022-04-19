@@ -174,19 +174,63 @@ const controller = {
         res.redirect('/')
     }
     },
-    adicionarQuadro: async (req, res) => {
+    areas: async (req, res) => {
+        try {
 
-        const { titulo, descricao, areaId, tarefaId } = req.body
+            if(req.session.authenticated) {
 
-        await models.Usuario.create({
-            titulo: titulo,
-            descricao: descricao,
-            areaId: areaId,
-            tarefaId: tarefaId
-        })
+                const todasAsAreasDeTrabalho = await models.Areas.findAll({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    },
+                    include: [
+                        {
+                            association: 'quadros',
+                            include: [
+                                { 
+                                    association: "tarefas",
+                                    include: [
+                                        {
+                                            association: "usuarios"
+                                        },
+                                        {
+                                            association: "tags"
+                                        },
+                                        {
+                                            association: "rascunhos"
+                                        },
+                                        {
+                                            association: "comentarios",
+                                            include: [
+                                                {
+                                                    association: "usuarios"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }          
+                            ] 
+                        }
+                    ]              
+                    
+                })
 
-        res.redirect('/')
 
+                res.render('areas', {
+                    title: 'Minhas Áreas',
+                    todasAsAreasDeTrabalho: todasAsAreasDeTrabalho,
+                    authenticated: req.session.authenticated,
+                    isAdmin: req.session.isAdmin
+                })
+
+            } else {
+                res.redirect('/')
+            }
+
+        } catch(erro) {
+            res.redirect('/')
+        }
     },
     rascunhos: async (req, res) => {
         try {
@@ -261,26 +305,6 @@ const controller = {
             res.redirect('/')
         }
     },
-    todas_as_areas: async (req, res) => {
-        try {
-
-            if(req.session.authenticated) {
-
-
-                res.render('area', {
-                    title: 'Minhas Áreas',
-                    authenticated: req.session.authenticated,
-                    isAdmin: req.session.isAdmin
-                })
-
-            } else {
-                res.redirect('/')
-            }
-
-        } catch(erro) {
-            res.redirect('/')
-        }
-    },
     ajuda: async (req, res) => {
         try {
 
@@ -338,32 +362,51 @@ const controller = {
             res.redirect('/')
         }
     },
-    quadros: async (req, res) => {
-        try {
-
-            if(req.session.authenticated) {
-
-                res.render('quadros', {
-                    title: 'O meus quadros',
-                    authenticated: req.session.authenticated,
-                    isAdmin: req.session.isAdmin
-                })
-
-            } else {
-                res.redirect('/')
-            }
-
-        } catch(erro) {
-            res.redirect('/')
-        }
-    },
     tarefas: async (req, res) => {
         try {
 
             if(req.session.authenticated) {
 
+                const todasAsAreasDeTrabalho = await models.Areas.findAll({
+                
+                    where: {
+                        usuarioId: req.session.authenticated.id
+                    },
+                    include: [
+                        {
+                            association: 'quadros',
+                            include: [
+                                { 
+                                    association: "tarefas",
+                                    include: [
+                                        {
+                                            association: "usuarios"
+                                        },
+                                        {
+                                            association: "tags"
+                                        },
+                                        {
+                                            association: "rascunhos"
+                                        },
+                                        {
+                                            association: "comentarios",
+                                            include: [
+                                                {
+                                                    association: "usuarios"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }          
+                            ] 
+                        }
+                    ]              
+                    
+                })
+
                 res.render('tarefas', {
                     title: 'Minhas Tarefas',
+                    todasAsAreasDeTrabalho: todasAsAreasDeTrabalho,
                     authenticated: req.session.authenticated,
                     isAdmin: req.session.isAdmin
                 })

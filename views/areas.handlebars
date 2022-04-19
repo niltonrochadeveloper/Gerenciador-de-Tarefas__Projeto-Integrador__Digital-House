@@ -1,0 +1,20 @@
+<section>
+    <article class="container pt-5">
+        <h1>Áreas</h1>
+        <div>
+            {{#each todasAsAreasDeTrabalho}}
+                <a href="/area-de-trabalho/{{dataValues.id}}"><div style="border: 0.5px solid #e2e2e2; max-width: 240px; min-width: 200px; border-radius: 5px; height: 100^%; padding: 8px; margin: 5px 0;">
+                    {{!-- {{../todasAsAreasDeTrabalho.length}} --}}
+                    <strong>{{dataValues.titulo}}</strong>
+                    <br>
+                    <br>
+                    Quadros: {{./quadros.length}}
+                    <br>
+                    {{!-- Tarefas: {{../tarefas}} --}}
+                    <br>
+                </div>
+                </a>
+            {{/each}}
+        </div>
+    </article>
+</section>

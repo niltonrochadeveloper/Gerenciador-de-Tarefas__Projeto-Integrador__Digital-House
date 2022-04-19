@@ -1,1 +1,18 @@
-tarefas
+<section>
+    <article class="container pt-5">
+        <h1>Tarefas</h1>
+        <div style="display: flex;">
+            {{#each todasAsAreasDeTrabalho}}
+                {{#each quadros}}
+                    <div style="border: 0.5px solid #e2e2e2; max-width: 240px; min-width: 200px; border-radius: 5px; height: 100%; padding: 8px; margin: 5px 10px 5px 0;">
+                        <strong><h4>{{dataValues.titulo}}</h4></strong>
+                        {{#each tarefas}}
+                           <strong>Tarefas:</strong> {{./dataValues.titulo}}
+                           <br>
+                        {{/each}}
+                    </div>
+                {{/each}}
+            {{/each}}
+        </div>
+    </article>
+</section>

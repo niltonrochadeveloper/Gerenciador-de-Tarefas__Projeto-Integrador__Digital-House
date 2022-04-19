@@ -28,6 +28,7 @@
             <label for="senha">Digite uma Senha</label>
             <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="password" name="senha" id="senha" value="{{senha}}">
             {{#if erroSenhaNaoPodeSerVazio}}<small style="color: red; padding-top: 5px;">{{erroSenhaNaoPodeSerVazio.senhaNaoPodeSerVazio}}</small>{{/if}}
+            {{#if erroSenhaMenorQue5Caracteres}}<small style="color: red; padding-top: 5px;">{{erroSenhaMenorQue5Caracteres.senhaMenorQue5Caracteres}}</small>{{/if}}
 
             <br>
 
@@ -35,7 +36,6 @@
             <input style="border: none; padding: 5px 0px 5px 0px; border-bottom: 0.5px solid #d2d2d2; background: transparent; outline: none;" type="password" name="confirmarSenha" id="confirmarSenha">
             {{#if erroSenhaNaoPodeSerVazio}}<small style="color: red; padding-top: 5px;">{{erroSenhaNaoPodeSerVazio.senhaNaoPodeSerVazio}}</small>{{/if}}
             {{#if erroSenhaNaoConfere}}<small style="color: red; padding-top: 5px;">{{erroSenhaNaoConfere.senhaNaoConfere}}</small>{{/if}}
-
             
             <button id="submit" type="submit" class="btn" style="color: #fff; background-color: blue; border-radius: 25px; margin-top: 25px;">Logar</button>
 

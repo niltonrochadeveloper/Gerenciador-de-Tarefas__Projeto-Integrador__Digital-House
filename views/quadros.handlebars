@@ -4,8 +4,12 @@
         <div>
             {{#each todasAsAreasDeTrabalho}}
                 {{#each quadros}}
-                    <div style="border: 0.5px solid #e2e2e2; max-width: 240px; min-width: 200px; border-radius: 5px; height: 70px; padding: 8px; margin: 5px 0;">
-                        {{dataValues.titulo}}
+                    <div style="border: 0.5px solid #e2e2e2; max-width: 240px; min-width: 200px; border-radius: 5px; height: 100%; padding: 8px; margin: 5px 0;">
+                        <strong><h4>{{dataValues.titulo}}</h4></strong>
+                        {{#each tarefas}}
+                           <strong>Tarefas:</strong> {{./dataValues.titulo}}
+                           <br>
+                        {{/each}}
                     </div>
                 {{/each}}
             {{/each}}

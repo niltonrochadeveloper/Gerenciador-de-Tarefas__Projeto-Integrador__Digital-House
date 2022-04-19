@@ -7,6 +7,7 @@ const indexController = require('../controllers/indexController')
 router.get('/', indexController.index)
 router.get('/area-de-trabalho/:id', indexController.areasdetrabalho)
 
+router.get('/areas', indexController.areas)
 router.get('/ajuda', indexController.ajuda)
 router.get('/meu-perfil', indexController.meu_perfil)
 router.get('/configuracoes', indexController.configuracoes)

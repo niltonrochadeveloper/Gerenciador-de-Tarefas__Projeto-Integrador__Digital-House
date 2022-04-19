@@ -1,7 +1,7 @@
 {
   "name": "dh-projeto-integrador",
   "version": "1.0.0",
-  "description": "Gerenciamento de Tarefa - Simples",
+  "description": "Gerenciamento de Tarefa - Simples | Projeto Integrador Digital House",
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -25,10 +25,11 @@
     "nodemon": "^2.0.13"
   },
   "scripts": {
-    "start": "npx sequelize-cli db:create & npx sequelize-cli db:migrate & npx sequelize-cli db:seed:all & npm run dev",
+    "start": "node app.js",
+    "starter": "npx sequelize-cli db:create & npx sequelize-cli db:migrate & npm run dev",
     "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nilton Rocha",
   "license": "ISC"
 }

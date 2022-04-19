@@ -37,9 +37,14 @@ const controller = {
 
             erroEmailNaoPodeSerVazio = []
             erroSenhaNaoPodeSerVazio = []
+            erroSenhaMenorQue5Caracteres = []
 
             if(!senha || typeof senha == undefined || senha == null || senha == "") {
-                erroSenhaNaoPodeSerVazio.push({SenhaNaoPodeSerVazio: "O campo senha não pode ser vazio"})
+                erroSenhaNaoPodeSerVazio.push({senhaNaoPodeSerVazio: "O campo senha não pode ser vazio"})
+            }
+
+            if(senha.length < 4) {
+                erroSenhaMenorQue5Caracteres.push({senhaMenorQue5Caracteres: "A senha deve ter no mínimo de 5 caracteres."})
             }
 
             if(!email || typeof email == undefined || email == null || email == "") {
@@ -97,6 +102,7 @@ const controller = {
                     layout: 'no',
                     senha: senha,
                     email: email,
+                    erroSenhaMenorQue5Caracteres: erroSenhaMenorQue5Caracteres[0],
                     erroSenhaNaoPodeSerVazio: erroSenhaNaoPodeSerVazio[0],
                     erroEmailNaoPodeSerVazio: erroEmailNaoPodeSerVazio[0],
                     usuarioNaoCadastrado: usuarioNaoCadastrado,
@@ -135,7 +141,7 @@ const controller = {
             var erroSenhaNaoPodeSerVazio = []
             var erroConfirmarSenhaNaoPodeSerVazio = []
             var erroSenhaNaoConfere = []
-            
+
                         
             const { nome, sobre, email, senha, confirmarSenha } = req.body
 
